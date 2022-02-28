@@ -3,11 +3,23 @@ import {connect} from 'react-redux'  // required to connect redux and app. Go to
 
 import {filledOrdersLoadedSelector, filledOrdersSelector} from '../store/selectors'
 
-import Spinner from './Spinner'
+import Loader from './Loader'
 
+const showFilledOrders = (filledOrders) =>{
+  return(
+    <tbody>
+      { filledOrders.map((order) => {
+        return(
+          <tr className={`order-${order.id}`} key={order.id}>
+            <td className= "text-muted">{order.formattedTimeStamp}</td>
+            <td>{order.tokenAmount}</td>
+            <td className={`text-${order.tokenPriceClass}`}>{order.tokenPrice}</td>
+          </tr>
+        )
+      })}
+    </tbody>)
+}
 class Trades extends Component {
-
-
   render(){
     return(
       <div className="card bg-dark text-white">
@@ -17,35 +29,28 @@ class Trades extends Component {
           <span>Trades</span>
           {this.props.filledOrdersLoaded
             ?<span></span>
-            :<span class="spinner-border spinner-border-sm ml-auto" role="status" aria-hidden="true"></span>
+            :<Loader type="header"/>
           }
           
         </div>
 
         <div className="card-body">
+
           <table className="table table-dark table-sm small">
             <thead> 
               <tr>
-                <th> Time </th>
+                <th> Time Executed</th>
                 <th> POI </th>
                 <th> POI/ETH </th>
               </tr>
             </thead>
-              {this.props.filledOrdersLoaded
-                ? this.props.filledOrders.map((order) => {
-                    return (
-                      <tbody className={`order-${order.id}`} key={order.id}>
-                        <tr>
-                          <td className= "text-muted">{order.formattedTimeStamp}</td>
-                          <td>{order.tokenAmount}</td>
-                          <td className={`text-${order.tokenPriceClass}`}>{order.tokenPrice}</td>
-                        </tr>
-                      </tbody>
-                    )
-                  })
-                : <Spinner type="table"/>
+              {this.props.filledOrders
+                ? showFilledOrders(this.props.filledOrders)
+                : <tbody></tbody>
               }
+
           </table>
+
         </div>
       </div>
     );

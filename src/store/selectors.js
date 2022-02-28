@@ -1,4 +1,4 @@
-import {get} from 'lodash' // deal with errors; prevents breaking
+import {get, reject, groupBy} from 'lodash'
 import moment from 'moment'
 import {createSelector} from 'reselect' //from redux
 
@@ -13,8 +13,7 @@ import {
 // export const accountSelector = createSelector(account, account => account)
 // export const accountSelector = createSelector(account, (account) => {account})
 const account = state => get(state, 'web3.account', '')
-export const accountSelector = createSelector(account, a => a)
-//
+export const accountSelector = createSelector(account, a => {return a})
 
 /// Check if necessary contracts are loaded
 const tokenLoaded = state => get(state, 'token.loaded', false)  //default value false
@@ -30,10 +29,22 @@ export const contractLoadedSelector = createSelector(
 	exchangeLoaded,
 	(tl, el) => (tl && el)
 )
-
+/////////
 const exchange = state => get(state, 'exchange.contract')
 export const exchangeSelector = createSelector(exchange, e => e)
+// 
+const allOrdersLoaded = state => get(state, 'exchange.allOrders.loaded', false)
+export const allOrdersLoadedSelector = createSelector(allOrdersLoaded, loaded => loaded)
 
+const allOrders = state => get(state, 'exchange.allOrders.data', [])
+export const allOrdersSelector = createSelector(allOrders, ao => ao)
+// 
+const cancelledOrdersLoaded = state => get(state, 'exchange.cancelledOrders.loaded', false)
+export const cancelledOrdersLoadedSelector = createSelector(cancelledOrdersLoaded, loaded => loaded)
+
+const cancelledOrders = state => get(state, 'exchange.cancelledOrders.data', [])
+export const cancelledOrdersSelector = createSelector(cancelledOrders, co => co)
+// 
 const filledOrdersLoaded = state => get(state, 'exchange.filledOrders.loaded', false)
 export const filledOrdersLoadedSelector = createSelector(filledOrdersLoaded, fol => fol)
 
@@ -54,7 +65,6 @@ export const filledOrdersSelector = createSelector(
 
 const decorateFilledOrders = (orders) => {
 	let previousOrder = orders[0]
-	console.log("NEED TO KNOW:", orders[0])
 	return (
 		orders.map((order) => {
 			order = decorateOrder(order)
@@ -104,6 +114,7 @@ const tokenPriceClass = (tokenPrice, orderId, previousOrder) => {
 	// Display in CSS green if order price > previous order
 	// Reversely, display CSS red if order price < previous order
 	if (previousOrder.id === orderId){
+		// Green if no previous order
 		return GREEN
 	}
 	if (previousOrder.tokenPrice <= tokenPrice){
@@ -112,6 +123,90 @@ const tokenPriceClass = (tokenPrice, orderId, previousOrder) => {
 		return RED
 	}
 }
+///////////////////////
+const openOrders = state =>{
+	const all = allOrders(state)
+	const filled = filledOrders(state)
+	const cancelled = cancelledOrders(state)
+
+	// reject returns elements that are NOT TRUTHY
+	// Filters out all filled or cancelled orders from all orders.
+	const openOrders = reject(all, (order) => {
+		// returns a boolean when any element in array is TRUTHY is found
+		const orderFilled = filled.some((o) => o.id === order.id)
+		const orderCancelled = cancelled.some((o) => o.id === order.id)
+		return (orderFilled || orderCancelled)
+	})
+	return openOrders
+}
+
+export const orderBookLoaded = state => cancelledOrdersLoaded(state) && filledOrdersLoaded(state) && allOrdersLoaded(state)
+
+export const orderBookSelector = createSelector(
+	openOrders,
+	(orders) => {
+
+		orders = decorateOrderBookOrders(orders)
+		const order2 = orders
+
+		orders = groupBy(orders, 'orderType')
+
+		const buyOrders = get(orders, 'buy', [])
+
+		orders = {
+			...orders,
+			// greatest price to smallest
+			buyOrders: buyOrders.sort((a,b) => b.tokenPrice-a.tokenPrice)
+		}
+		const sellOrders = get(orders, 'sell', [])
+		orders ={
+			...orders,
+			sellOrders: sellOrders.sort((a,b) => b.tokenPrice-a.tokenPrice)
+		}
+		return orders
+	}
+)
+const decorateOrderBookOrders = orders =>{
+	return(
+		orders.map((order) =>{
+			order = decorateOrder(order)
+			order = decorateOrderBookOrder(order)
+			return(order)
+		})
+	)
+}
+const decorateOrderBookOrder = (order) =>{
+	const orderType = order.tokenGive === ETHER_ADDRESS ? 'buy' : 'sell'
+	return ({
+		...order,
+		orderType,
+		orderTypeClass: orderTypeFillClass(orderType).type,
+		orderFillClass: orderTypeFillClass(orderType).fill
+	})
+}
+const orderTypeFillClass = orderType =>{
+	if(orderType === 'buy'){
+		return {type:GREEN, fill: 'sell'}
+	}else{
+		return {type: RED, fill: 'buy'}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

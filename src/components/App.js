@@ -6,6 +6,8 @@ import './App.css';
 import Navbar from './Navbar'
 import Content from './Content'
 
+import Loader from './Loader'
+
 import {
   loadWeb3, 
   loadAccount, 
@@ -109,9 +111,8 @@ class App extends Component {
         <Navbar configMetaMask= {this.configMetaMask.bind(this)}/>
         {this.props.contractLoaded
           ? <Content />
-          : <div style={{height: '100vh', backgroundColor: '#1d1d1d', color: 'white'}} id="loader" className="text-center d-flex align-items-center justify-content-center">LOADING...</div>
+          : <div style={{height: '100vh', backgroundColor: '#1d1d1d', color: 'white'}}><Loader type="Initialiser"/></div>
         }
-        
       </div>
     );
   }
