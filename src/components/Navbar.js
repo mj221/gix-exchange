@@ -3,6 +3,9 @@ import Identicon from 'identicon.js';
 import gixLogo from '../gix-logo2.png'
 import './App.css'
 
+import {connect} from 'react-redux'
+import {accountSelector} from '../store/selectors'
+
 class Navbar extends Component {
 
   render() {
@@ -68,4 +71,11 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+function mapStateToProps(state){
+  return {
+    account: accountSelector(state)
+  }
+}
+export default connect(mapStateToProps)(Navbar);
+
+

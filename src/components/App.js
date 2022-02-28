@@ -44,34 +44,39 @@ class App extends Component {
       ethereum.on('accountsChanged', async (accounts) => {
         // console.log("Account changed: ", accounts) 
         if (accounts[0] != null){
-          this.setState({account: accounts[0]})
-          await loadAccount(this.state.account, this.props.dispatch)
+          await loadAccount(accounts[0], this.props.dispatch)
         } else{
           this.setState({account: ''})
+          await loadAccount('', this.props.dispatch)
         }
+        this.loadBlockchainData(this.props.dispatch)
       });
 
       ethereum.on('chainChanged', (chainId) => {
         window.location.reload();
       });
+
+      this.loadBlockchainData(this.props.dispatch)
     }
     
 
   }
   async configMetaMask () {
     if(ethereum){
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
-                                      .catch((error) => {
-                                        if (error.code === 4001) {
-                                          console.log("User denied MetaMask. Please connect MetaMask again.")
-                                          // User rejected request
-                                        }
-                                      });
-      if(accounts !== null){
-        console.log("Account:", accounts[0])
-        this.setState({account: accounts[0]})
-        this.loadBlockchainData(this.props.dispatch)
+      try{
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+        if(accounts !== null){
+          console.log("Account:", accounts[0])
+          await loadAccount(accounts[0], this.props.dispatch)
+        }
+      }catch (err){
+        if (err.code === 4001){
+          console.log("User denied MetaMask. Please connect MetaMask again.")
+        }else{
+          console.log(err)
+        }
       }
+      
     }else{
       window.alert("Non-Ethereum browser detected. Try using MetaMask.")
     }
@@ -79,8 +84,7 @@ class App extends Component {
 
   async loadBlockchainData(dispatch) {
     const web3 = await loadWeb3(dispatch)
-    await loadAccount(this.state.account, dispatch)
-    
+
     const networkId = await ethereum.request({ method: 'eth_chainId' })
 
     const token = await loadToken(web3, networkId, dispatch)
@@ -102,7 +106,7 @@ class App extends Component {
   render(){
     return(
       <div>
-        <Navbar account={this.state.account} configMetaMask= {this.configMetaMask.bind(this)}/>
+        <Navbar configMetaMask= {this.configMetaMask.bind(this)}/>
         {this.props.contractLoaded
           ? <Content />
           : <div style={{height: '100vh', backgroundColor: '#1d1d1d', color: 'white'}} id="loader" className="text-center d-flex align-items-center justify-content-center">LOADING...</div>
@@ -114,7 +118,6 @@ class App extends Component {
 }
 
 function mapStateToProps(state){
-  console.log("DJKNS;", contractLoadedSelector(state))
   return {
     contractLoaded: contractLoadedSelector(state)
   }

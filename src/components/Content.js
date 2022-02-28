@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'  // required to connect redux and app. Go to bottom page for config.
 
+import {loadAllOrders} from '../store/interactions'
+import {exchangeSelector} from '../store/selectors'
+
+import Trades from './Trades'
+
 class Content extends Component {
+  componentDidMount(){
+    this.loadBlockchainData(this.props.dispatch)
+  }
+  async loadBlockchainData(dispatch){
+    await loadAllOrders(this.props.exchange, dispatch)
+  }
   render(){
     return(
       <div>
@@ -68,15 +79,7 @@ class Content extends Component {
           </div>
           {/*--------------------------------*/}
           <div className="vertical">
-            <div className="card bg-dark text-white">
-              <div className="card-header">
-                Card Title6
-              </div>
-              <div className="card-body">
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/#" className="card-link">Card link</a>
-              </div>
-            </div>
+            <Trades />
           </div>
           {/*--------------------------------*/}
         </div>
@@ -88,7 +91,7 @@ class Content extends Component {
 
 function mapStateToProps(state){
   return {
-    //todo
+    exchange: exchangeSelector(state)
   }
 }
 export default connect(mapStateToProps)(Content);
