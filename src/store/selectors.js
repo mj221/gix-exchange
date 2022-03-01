@@ -5,7 +5,8 @@ import {createSelector} from 'reselect' //from redux
 import {
 	ETHER_ADDRESS, 
 	tokens, ether,
-	RED, GREEN
+	RED, GREEN,
+	addressIsEqual
 } from '../helpers'
 
 
@@ -147,7 +148,6 @@ export const orderBookSelector = createSelector(
 	(orders) => {
 
 		orders = decorateOrderBookOrders(orders)
-		const order2 = orders
 
 		orders = groupBy(orders, 'orderType')
 
@@ -191,15 +191,91 @@ const orderTypeFillClass = orderType =>{
 		return {type: RED, fill: 'buy'}
 	}
 }
+///////////////////////////
+export const myFilledOrdersLoadedSelector = createSelector(filledOrdersLoaded, loaded => loaded)
 
+export const myFilledOrdersSelector = createSelector(
+	account,
+	filledOrders,
+	(account, orders) => {
+		// filter out user's conducted filled orders/trades
+		orders = orders.filter((o) => addressIsEqual(o.user, account) || addressIsEqual(o.userFill, account))
+		//ascending
+		orders = orders.sort((a,b) => a.timestamp - b.timestamp)
+		orders = decorateMyFilledOrders(orders, account)
+		return orders
+	}
+)
 
+const decorateMyFilledOrders = (orders, account) => {
+	return (
+		orders.map((order) => {
+			order = decorateOrder(order)
+			order = decorateMyFilledOrder(order, account)
+			return order
+		})
+	)
+}
 
+const decorateMyFilledOrder = (order, account) =>{
+	const isMyOrder = addressIsEqual(order.user, account)
 
+	let orderType
+	if(isMyOrder){
+		// buy order if userA trades(buy) ether for token, sell order otherwise
+		orderType = order.tokenGive === ETHER_ADDRESS ? 'buy' : 'sell'
+	}else{
+		// userA filled order and trades token away for ether. Sells token.
+		orderType = order.tokenGive === ETHER_ADDRESS ? 'sell' : 'buy'
+	}
 
+	return ({
+		...order,
+		orderTypeClass: orderTypeSignClass(orderType).type,
+		orderSignClass: orderTypeSignClass(orderType).sign
+	})
+}
 
+const orderTypeSignClass = orderType =>{
+	if(orderType === 'buy'){
+		return {type:GREEN, sign: '+'}
+	}else{
+		return {type: RED, sign: '-'}
+	}
+}
 
+export const myOpenOrdersLoadedSelector = createSelector(orderBookLoaded, loaded => loaded)
+export const myOpenOrdersSelector = createSelector(
+	account,
+	openOrders,
+	(account, orders) => {
+		orders = orders.filter((o) => addressIsEqual(o.user, account))
+		// descending by date
+		orders = orders.sort((a,b) => b.timestamp - a.timestamp)
+		orders = decorateMyOpenOrders(orders, account)
 
+		return orders
+	}
+)
+const decorateMyOpenOrders = (orders, account) => {
+	return (
+		orders.map((order) => {
+			order = decorateOrder(order)
+			order = decorateMyOpenOrder(order, account)
+			return order
+		})
+	)
+}
 
+const decorateMyOpenOrder = (order,account) =>{
+	let orderType = order.tokenGive === ETHER_ADDRESS? 'buy' : 'sell'
+
+	return ({
+		...order,
+		orderType,
+		orderTypeClass: orderTypeSignClass(orderType).type
+	})
+}
 
 
 

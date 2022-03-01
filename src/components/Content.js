@@ -6,6 +6,7 @@ import {exchangeSelector} from '../store/selectors'
 
 import Trades from './Trades'
 import OrderBook from './OrderBook'
+import MyTransactions from './MyTransactions'
 
 class Content extends Component {
   componentDidMount(){
@@ -59,15 +60,7 @@ class Content extends Component {
               </div>
             </div>
 
-            <div className="card bg-dark text-white">
-              <div className="card-header">
-                Card Title5
-              </div>
-              <div className="card-body">
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="/#" className="card-link">Card link</a>
-              </div>
-            </div>
+            <MyTransactions />
 
           </div>
           {/*--------------------------------*/}

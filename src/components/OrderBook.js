@@ -44,8 +44,8 @@ class OrderBook extends Component {
             ?<span></span>
             :<Loader type="header"/>
           }
-          {console.log("Loaded:", this.props.orderBookLoaded)}
-          {console.log("SHOW:", this.props.showOrderBook)}
+          {/*{console.log("Loaded:", this.props.orderBookLoaded)}
+          {console.log("SHOW:", this.props.showOrderBook)}*/}
         </div>
 
         <div className="card-body order-book">

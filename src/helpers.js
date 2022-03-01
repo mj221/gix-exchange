@@ -8,3 +8,7 @@ export const ether = n => tokens(n)
 
 export const RED = 'danger'
 export const GREEN = 'success'
+
+export const addressIsEqual = (address1, address2) =>{
+	return web3.utils.toChecksumAddress(address1) === web3.utils.toChecksumAddress(address2)
+}

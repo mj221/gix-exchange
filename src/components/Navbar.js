@@ -9,6 +9,12 @@ import {accountSelector} from '../store/selectors'
 class Navbar extends Component {
 
   render() {
+    const identiconStyle ={
+      width: 30,
+      height: 30,
+      borderRadius: 30 / 8,
+      overflow: "hidden"
+    }
     return (
       <nav className="navbar navbar-dark fixed-top bg-dark flex-nowrap p-0 shadow">
         
@@ -30,11 +36,12 @@ class Navbar extends Component {
                   {this.props.account 
                       ? <><img
                     className="mr-2"
+                    style = {identiconStyle}
                     width='30'
                     height='30'
                     onClick= {() => window.open(`https://etherscan.io/address/${this.props.account}`, "_blank")}
                     rel="noopener noreferrer"
-                    src={`data:image/png;base64,${new Identicon(this.props.account, 30).toString()}`}
+                    src={`data:image/png;base64,${new Identicon(this.props.account, {size: 30,background: [0, 0, 0, 100], foreground: [255, 255, 255, 255]}).toString()}`}
                     alt="" /><span className="textshadow mr-1" style = {{color: 'white'}}>|</span></>
                       :<span><button 
                                 className="btn btn-light"
