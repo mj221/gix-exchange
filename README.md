@@ -1,19 +1,21 @@
 # GiX Exchange
 
-This project is a WIP decentralised exchange for custom ERC-20 tokens and Ethereum with open order book and price charts to facilitate a familiar outlook for traders.
+This project is a WIP decentralised exchange built with Ethereum Smart contracts and ReactJS for ERC-20 tokens with open order books and price charts to allow familiar trading engagement and experience with traditional traders. 
 
 ## Road Map
 
-Add exchange smart contracts [X]
-Conduct smart contract tests [X]
-Add interactable navbar [X] 
-Added redux JS backend [X]
-Frontend: trades [X]
-Frontend: open orders [X]
-Frontend: user transactions [X]
-Frontend: Add readable price chart []
-Frontend: Add readable user balance []
-Frontend: Add buy and sell order []
+#### `Add exchange smart contracts [X]`
+#### `Conduct smart contract tests [X]`
+#### `Add interactable navbar [X]`
+#### `Added redux JS backend [X]`
+#### `Frontend: trades [X]`
+#### `Frontend: open orders [X]`
+#### `Frontend: user transactions [X]`
+#### `Frontend: Add readable price chart []`
+#### `Frontend: Add readable user balance []`
+#### `Frontend: Add buy and sell order []`
+#### `Improve UI/UX []`
+#### `Add more tokens []`
 
 <!-- ### `npm start`
 
