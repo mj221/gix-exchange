@@ -1,12 +1,21 @@
-# Getting Started with Create React App
+# GiX Exchange
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a WIP decentralised exchange for custom ERC-20 tokens and Ethereum with open order book and price charts to facilitate a familiar outlook for traders.
 
-## Available Scripts
+## Road Map
 
-In the project directory, you can run:
+Add exchange smart contracts [X]
+Conduct smart contract tests [X]
+Add interactable navbar [X] 
+Added redux JS backend [X]
+Frontend: trades [X]
+Frontend: open orders [X]
+Frontend: user transactions [X]
+Frontend: Add readable price chart []
+Frontend: Add readable user balance []
+Frontend: Add buy and sell order []
 
-### `npm start`
+<!-- ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -68,3 +77,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ -->
