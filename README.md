@@ -1,4 +1,4 @@
-# GiX Exchange
+# GiX EXCHANGE
 
 This project is a WIP decentralised exchange built with Ethereum Smart contracts and ReactJS for ERC-20 token trading with open order books and price charts for familiar trading engagement and experience with traditional traders. 
 
