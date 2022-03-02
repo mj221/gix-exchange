@@ -6,6 +6,12 @@ This project is a WIP decentralised exchange built with Ethereum Smart contracts
   <img height="300" src="https://user-images.githubusercontent.com/50122869/156268981-f9a2ab72-ad67-4325-817b-aac32e398726.png">
 </p>
 
+## Powered by GiX.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/50122869/156272304-4ebdfa11-4574-4ef8-a8fd-b19ecbaea152.png">
+</p>
+
+
 ## Road Map
 
 #### `Add exchange smart contracts [X]`
