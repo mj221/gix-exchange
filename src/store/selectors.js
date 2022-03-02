@@ -277,8 +277,60 @@ const decorateMyOpenOrder = (order,account) =>{
 	})
 }
 
+export const priceChartLoadedSelector = createSelector(filledOrdersLoaded, loaded => loaded)
+export const priceChartSelector = createSelector(
+	filledOrders,
+	(orders) => {
+		//earliest to latest
+		orders = orders.sort((a,b) => a.timestamp - b.timestamp)
+		orders = orders.map((o) => decorateOrder(o))
+		
+		let secondLastOrder, lastOrder
+		[secondLastOrder, lastOrder] = orders.slice(orders.length - 2, orders.length)
 
+		const lastPrice = get(lastOrder, 'tokenPrice', 0)
+		const secondLastPrice = get(secondLastOrder, 'tokenPrice', 0)
+		return ({
+			lastPrice,
+			lastPriceChange: (lastPrice >= secondLastPrice) ? '+' : '-',
+			series: [{
+				data: buildGraphData(orders)
+			}]
+		})
+	}
+)
 
+const buildGraphData = orders =>{
+	// group by trades made in the same hour
+	orders = groupBy(orders, (o) => moment.unix(o.timestamp).startOf('hour').format())
+
+	// get all grouped hour times
+	const hours = Object.keys(orders)
+
+	const graphData = hours.map((hour) => {
+		//calculate price
+		const group = orders[hour]
+
+		const open = group[0] //first order
+
+		const close = group[group.length - 1] //last order
+
+		const prices = group.map(o => o.tokenPrice)
+		const high = Math.max(...prices)
+		const low = Math.min(...prices)
+		// Alternatively, could use lodash like below:
+		// const high = maxBy(group, 'tokenPrice')
+		// const low = minBy(group, 'tokenPrice')
+		
+
+		return ({
+			x: new Date(hour),
+			// [Open, High, Low, Close]
+			y: [open.tokenPrice, high, low, close.tokenPrice]
+		})
+	})
+	return graphData
+}
 
 
 

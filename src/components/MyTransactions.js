@@ -64,7 +64,6 @@ class MyTransactions extends Component{
 										<th>POI/ETH</th>
 									</tr>
 								</thead>
-								{console.log("My open orders", this.props.myOpenOrdersLoaded)}
 								{this.props.myFilledOrdersLoaded
 		              ?showMyFilledOrders(this.props.myFilledOrders)
 		              :<tbody></tbody>
