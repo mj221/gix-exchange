@@ -2,6 +2,10 @@
 
 This project is a WIP decentralised exchange built with Ethereum Smart contracts and ReactJS for ERC-20 tokens with open order books and price charts to allow familiar trading engagement and experience with traditional traders. 
 
+<p align="center">
+  <img height="300" src="https://user-images.githubusercontent.com/50122869/156268981-f9a2ab72-ad67-4325-817b-aac32e398726.png">
+</p>
+
 ## Road Map
 
 #### `Add exchange smart contracts [X]`
@@ -17,6 +21,7 @@ This project is a WIP decentralised exchange built with Ethereum Smart contracts
 #### `Improve UI/UX []`
 #### `Add more tokens []`
 
+<hr>
 <!-- ### `npm start`
 
 Runs the app in the development mode.\
