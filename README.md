@@ -3,8 +3,8 @@
 This project is a WIP decentralised exchange built with Ethereum Smart contracts and ReactJS for ERC-20 token trading. Integrated with open order books and price charts for familiar trading engagement and experience with traditional traders. 
 
 <p align="center">
-  <img height="300" src="https://user-images.githubusercontent.com/50122869/156268981-f9a2ab72-ad67-4325-817b-aac32e398726.png">
-  <img height="300" src="https://user-images.githubusercontent.com/50122869/156274411-95f35b06-288e-4c10-a4da-28cf4936a8fe.png">
+  <img height="150" src="https://user-images.githubusercontent.com/50122869/156268981-f9a2ab72-ad67-4325-817b-aac32e398726.png">
+  <img height="150" src="https://user-images.githubusercontent.com/50122869/156274411-95f35b06-288e-4c10-a4da-28cf4936a8fe.png">
 </p>
 
 ## Powered by GiX.
