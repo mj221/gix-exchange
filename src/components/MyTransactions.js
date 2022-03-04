@@ -1,16 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component} from 'react'
 import {Tabs, Tab} from 'react-bootstrap'
 
 import Loader from './Loader'
 
 import {connect} from 'react-redux'
+import './App.css';
 
 import {
 	myFilledOrdersLoadedSelector, 
 	myFilledOrdersSelector,
 	myOpenOrdersLoadedSelector,
-	myOpenOrdersSelector
+	myOpenOrdersSelector,
+	accountSelector,
+	exchangeSelector,
+	orderCancellingSelector
+
 } from '../store/selectors'
+
+import {cancelOrder} from '../store/interactions'
 
 const showMyFilledOrders = (myfilledOrders) =>{
   return(
@@ -27,15 +34,34 @@ const showMyFilledOrders = (myfilledOrders) =>{
     </tbody>)
 }
 
-const showMyOpenOrders = myopenOrders =>{
+const showMyOpenOrders = (props) =>{
+
+	const {myOpenOrders, orderCancelling, dispatch, account, exchange} = props
 	return(
 		<tbody>
-      { myopenOrders.map((order) => {
+      { myOpenOrders.map((order) => {
         return(
           <tr className={`order-${order.id}`} key={order.id}>
-            <td className={`text-${order.orderTypeClass}`}>{order.tokenPrice}</td>
-            <td className={`text-${order.orderTypeClass}`}>{order.tokenAmount}</td>
-            <td className="text-muted">x</td>
+	          <td style = {{verticalAlign: 'baseline'}} className={`text-${order.orderTypeClass}`}>{order.tokenAmount}</td>
+            <td style = {{verticalAlign: 'baseline'}} className={`text-${order.orderTypeClass}`}>{order.tokenPrice}</td>
+            <td 
+            	style = {{verticalAlign: 'baseline'}} 
+            	className="text-muted"
+            	>
+	        			<button 
+	        				key={order.id}
+	        				name={order.id}
+	        				className="btn btn-dark btn-sm"
+	        				onClick={(event) => {
+	        					if(!orderCancelling){
+	        						cancelOrder(exchange, order, account, dispatch)
+	        					}
+		            		
+		            	}}
+	        				>
+	        				<span>Cancel</span>
+	      				</button>
+            </td>
           </tr>
         )
       })}
@@ -43,12 +69,13 @@ const showMyOpenOrders = myopenOrders =>{
 }
 
 class MyTransactions extends Component{
+
 	render(){
 		return (
 			<div className="card bg-dark text-white">
 				<div className="card-header d-flex align-items-center">
 					<span>My Transactions</span>
-          {this.props.myFilledOrdersLoaded && this.props.myOpenOrdersLoaded
+          {this.props.myFilledOrdersLoaded && this.props.myOpenOrdersLoaded && !this.props.orderCancelling
             ?<span></span>
             :<Loader type="header"/>
           }
@@ -56,7 +83,7 @@ class MyTransactions extends Component{
 				<div className="card-body">
 					<Tabs defaultActiveKey="trades" className="bg-dark text-white">
 						<Tab eventKey="trades" title="Trades" className="bg-dark">
-							<table className="table table-dark table-sm small">
+							<table className="table table-dark table-sm small table-hover">
 								<thead>
 									<tr>
 										<th>Time Executed</th>
@@ -71,16 +98,16 @@ class MyTransactions extends Component{
 							</table>
 						</Tab>
 						<Tab eventKey="orders" title="Orders">
-							<table className="table table-dark table-sm small">
+							<table className="table table-dark table-sm small table-hover">
 								<thead>
 									<tr>
 										<th>Amount</th>
 										<th>POI/ETH</th>
-										<th>Cancel</th>
+										<th></th>
 									</tr>
 								</thead>
 								{this.props.myOpenOrdersLoaded
-		              ?showMyOpenOrders(this.props.myOpenOrders)
+		              ?showMyOpenOrders(this.props)
 		              :<tbody></tbody>
 		            }
 							</table>
@@ -96,7 +123,10 @@ function mapStateToProps(state){
     myFilledOrdersLoaded: myFilledOrdersLoadedSelector(state),
     myFilledOrders: myFilledOrdersSelector(state),
     myOpenOrdersLoaded: myOpenOrdersLoadedSelector(state),
-    myOpenOrders: myOpenOrdersSelector(state)
+    myOpenOrders: myOpenOrdersSelector(state),
+    orderCancelling: orderCancellingSelector(state),
+    account: accountSelector(state),
+    exchange: exchangeSelector(state)
   }
 }
 export default connect(mapStateToProps)(MyTransactions);
