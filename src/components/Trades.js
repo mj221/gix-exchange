@@ -36,7 +36,7 @@ class Trades extends Component {
 
         <div className="card-body">
 
-          <table className="table table-dark table-sm small">
+          <table className="table table-dark table-sm small table-hover">
             <thead> 
               <tr>
                 <th> Time Executed</th>

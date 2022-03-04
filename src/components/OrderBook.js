@@ -3,31 +3,52 @@ import {connect} from 'react-redux'  // required to connect redux and app. Go to
 
 import {
   orderBookLoaded,
-  orderBookSelector
+  orderBookSelector,
+  accountSelector,
+  exchangeSelector
 } from '../store/selectors'
 
-import Loader from './Loader'
+import {fillOrder} from '../store/interactions'
 
-const renderOrder = (order, orderBook) =>{
+import Loader from './Loader'
+import {Tooltip, OverlayTrigger} from 'react-bootstrap'
+
+const renderOrder = (order, props) =>{
+  const {exchange, account, dispatch} =  props
   return(
-    <tr key={order.id}>
-      <td>{order.tokenAmount}</td>
-      <td className={`text-${order.orderTypeClass}`}>{order.tokenPrice}</td>
-      <td>{order.etherAmount}</td>
-    </tr>
+    <OverlayTrigger
+      key={order.id}
+      placement='auto'
+      overlay={
+        <Tooltip id={order.id}>
+          {`Click here to ${order.orderFillAction}`}
+        </Tooltip>  
+      }
+    >
+      <tr 
+        key={order.id} 
+        className="order-book-order" 
+        onClick={(e) => fillOrder(exchange, order, account, dispatch)}
+      >
+        <td>{order.tokenAmount}</td>
+        <td className={`text-${order.orderTypeClass}`}>{order.tokenPrice}</td>
+        <td>{order.etherAmount}</td>
+      </tr>
+    </OverlayTrigger>
   )
 }
 
-const showOrderBook = (orderBook) =>{
+const showOrderBook = (props) =>{
+  const {orderBook} = props 
   return (
     <tbody>
-      {orderBook.sellOrders.map((order) => renderOrder(order, orderBook))}
+      {orderBook.sellOrders.map((order) => renderOrder(order, props))}
       <tr>
         <th>POI</th>
         <th>POI/ETH</th>
         <th>ETH</th>
       </tr>
-      {orderBook.buyOrders.map((order) => renderOrder(order, orderBook))}
+      {orderBook.buyOrders.map((order) => renderOrder(order, props))}
     </tbody>
   )
 }
@@ -49,9 +70,9 @@ class OrderBook extends Component {
         </div>
 
         <div className="card-body order-book">
-          <table className="table table-dark table-sm small">
+          <table className="table table-dark table-sm small table-hover">
             {this.props.orderBookLoaded
-              ?showOrderBook(this.props.showOrderBook)
+              ?showOrderBook(this.props)
               :<tbody></tbody>
             }
           </table>
@@ -64,7 +85,9 @@ class OrderBook extends Component {
 function mapStateToProps(state){
   return {
     orderBookLoaded: orderBookLoaded(state),
-    showOrderBook: orderBookSelector(state)
+    orderBook: orderBookSelector(state),
+    account: accountSelector(state),
+    exchange: exchangeSelector(state)
   }
 }
 export default connect(mapStateToProps)(OrderBook);

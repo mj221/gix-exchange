@@ -8,7 +8,9 @@ import {
 	filledOrdersLoaded,
 	allOrdersLoaded,
 	orderCancelling,
-	orderCancelled
+	orderCancelled,
+	orderFilling,
+	orderFilled
 } from './actions'
 
 import Exchange from '../abis/Exchange.json'
@@ -84,14 +86,26 @@ export const cancelOrder = async (exchange, order, account, dispatch) => {
 					})
 	
 }
+export const fillOrder = async (exchange, order, account, dispatch) => {
+	await exchange.methods.fillOrder(order.id)
+					.send({from: account})
+					.on('transactionHash', (hash) => {
+						dispatch(orderFilling())
+						return true
+					}).catch((error) =>{
+						console.log("There was an error in filling the order.")
+						return false
+					})
+}
 
+// smart contract event listener
 export const subscribeToEvents = async(exchange, dispatch)=>{
 	await exchange.events.Cancel({}, (error, event) =>{
 		dispatch(orderCancelled(event.returnValues))
 	})
+	await exchange.events.Trade({}, (error, event) => {
+		dispatch(orderFilled(event.returnValues))
+	})
 }
-
-
-
 
 
