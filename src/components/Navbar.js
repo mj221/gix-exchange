@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
+import {Tooltip, OverlayTrigger} from 'react-bootstrap'
 import gixLogo from '../gix-logo2.png'
 import './App.css'
 
 import {connect} from 'react-redux'
 import {accountSelector} from '../store/selectors'
+
+
+const renderTooltip = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Go to EtherScan
+  </Tooltip>
+)
 
 class Navbar extends Component {
 
@@ -29,11 +37,11 @@ class Navbar extends Component {
           </div>
         </a>
        
-        <div className = "nav-link-hover" title = "Go to Etherscan">
+        <div className = "nav-link-hover">
 
           <ul className="navbar-nav px-2">
               <li className="navbar-item text-nowrap d-none d-sm-none d-sm-block">
-                  {this.props.account 
+                  {this.props.account !== ''
                       ? <><img
                     className="mr-2"
                     style = {identiconStyle}
@@ -59,15 +67,20 @@ class Navbar extends Component {
                     rel="noopener noreferrer"
                     target="_blank"                  
                     >
-
-                    <small className="text-secondary">
-                        
+                    <OverlayTrigger
+                      placement="bottom"
+                      delay={{ show: 250, hide: 400 }}
+                      overlay={renderTooltip}
+                    >
+                      <small className="text-secondary">
                         <small 
                           id="account" 
                           style={{color: 'white'}}>{this.props.account? this.props.account: ""}
                         </small>
+                      </small>
+                      
+                    </OverlayTrigger>
                     
-                    </small>
                   </a>
               </li>
           </ul>
