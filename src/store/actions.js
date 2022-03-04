@@ -45,3 +45,24 @@ export function allOrdersLoaded(orders){
 		allOrders: orders
 	}
 }
+export function orderCancelling(){
+	return{
+		type: 'ORDER_CANCELLING'
+	}
+}
+
+export function orderCancelled(order){
+	return{
+		type: 'ORDER_CANCELLED',
+		cancelledOrder: order
+	}
+}
+
+
+
+
+
+
+
+
+
