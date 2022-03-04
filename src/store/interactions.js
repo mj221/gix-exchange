@@ -6,7 +6,9 @@ import {
 	exchangeLoaded,
 	cancelledOrdersLoaded,
 	filledOrdersLoaded,
-	allOrdersLoaded
+	allOrdersLoaded,
+	orderCancelling,
+	orderCancelled
 } from './actions'
 
 import Exchange from '../abis/Exchange.json'
@@ -70,8 +72,24 @@ export const loadAllOrders = async (exchange, dispatch) => {
 	dispatch(allOrdersLoaded(allOrders))
 }
 
+export const cancelOrder = async (exchange, order, account, dispatch) => {
+	await exchange.methods.cancelOrder(order.id)
+					.send({from: account})
+					.on('transactionHash', (hash) => {
+						dispatch(orderCancelling())
+						return true
+					}).catch((error) =>{
+						console.log("There was an error in cancelling the order.")
+						return false
+					})
+	
+}
 
-
+export const subscribeToEvents = async(exchange, dispatch)=>{
+	await exchange.events.Cancel({}, (error, event) =>{
+		dispatch(orderCancelled(event.returnValues))
+	})
+}
 
 
 
