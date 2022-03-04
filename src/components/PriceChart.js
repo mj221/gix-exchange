@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import Chart from 'react-apexcharts'
 import Loader from './Loader'
 
-import {chartOptions, dummyData} from './PriceChart.config.js'
+import {chartOptions} from './PriceChart.config.js'
 import {
 	priceChartLoadedSelector,
 	priceChartSelector
