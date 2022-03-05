@@ -25,6 +25,7 @@ function token(state = {}, action) {
 }
 
 function exchange(state = {}, action) {
+	let data, index
 	switch(action.type){
 		case 'EXCHANGE_LOADED':
 			return {...state, loaded: true, contract: action.contract}
@@ -52,8 +53,7 @@ function exchange(state = {}, action) {
 			return {...state, orderFilling: true}
 		case 'ORDER_FILLED':
 			/// prevent duplication
-			let data 
-			const index = state.filledOrders.data.findIndex(order => order.id === action.filledOrder.id)
+			index = state.filledOrders.data.findIndex(order => order.id === action.filledOrder.id)
 			if(index === -1){
 				data =[...state.filledOrders.data, action.filledOrder]
 			}else{
@@ -83,6 +83,41 @@ function exchange(state = {}, action) {
 			return {...state, tokenDepositAmount: action.amount}
 		case 'TOKEN_WITHDRAW_AMOUNT_CHANGED':
 			return {...state, tokenWithdrawAmount: action.amount}
+
+		case 'BUY_ORDER_AMOUNT_CHANGED':
+			return {...state, buyOrder:{...state.buyOrder, amount: action.amount}}
+		case 'BUY_ORDER_PRICE_CHANGED':
+			return {...state, buyOrder:{...state.buyOrder, price: action.price}}
+		case 'BUY_ORDER_MAKING':
+			return {...state, buyOrder:{...state.buyOrder, amount: null, price: null, making: true}}
+		case 'ORDER_MADE':
+			index= state.allOrders.data.findIndex(order=>order.id === action.order.id);
+			if(index === -1){
+				data = [...state.allOrders.data, action.order]
+			}else{
+				data = state.allOrders.data
+			}
+			return{
+				...state,
+				allOrders:{
+					...state.allOrders,
+					data
+				},
+				buyOrder:{
+					...state.buyOrder,
+					making: false
+				},
+				sellOrder:{
+					...state.sellOrder,
+					making: false
+				}
+			}
+		case 'SELL_ORDER_AMOUNT_CHANGED':
+			return {...state, sellOrder:{...state.sellOrder, amount: action.amount}}
+		case 'SELL_ORDER_PRICE_CHANGED':
+			return {...state, sellOrder:{...state.sellOrder, price: action.price}}
+		case 'SELL_ORDER_MAKING':
+			return {...state, sellOrder:{...state.sellOrder, amount: null, price: null, making: true}}
 		default:
 			return state
 	}
