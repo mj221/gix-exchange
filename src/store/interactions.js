@@ -16,7 +16,10 @@ import {
 	exchangeEthBalanceLoaded,
 	exchangeTokenBalanceLoaded,
 	balancesLoaded,
-	balancesLoading
+	balancesLoading,
+	buyOrderMaking,
+	sellOrderMaking,
+	orderMade
 } from './actions'
 
 import Exchange from '../abis/Exchange.json'
@@ -192,6 +195,44 @@ export const withdrawToken = async(exchange, web3, tokenWithdrawAmount, account,
 	}
 }
 
+export const makeBuyOrder = async (exchange, token, web3, order, account, dispatch) => {
+	if (account !== '' && order !== null){
+		const tokenGet = token.options.address
+		const amountGet = web3.utils.toWei(order.amount.toString(), 'ether')
+		const tokenGive = ETHER_ADDRESS
+		const amountGive = web3.utils.toWei((order.amount * order.price).toString(), 'ether')
+
+		await exchange.methods.makeOrder(tokenGet, amountGet, tokenGive, amountGive)
+								.send({from: account})
+								.on('transactionHash', (hash) =>{
+									dispatch(buyOrderMaking())
+								}).on('error', (error) =>{
+									console.log(error)
+									// window.alert("Could not make buy order. Try again.")
+								})
+	}
+	
+}
+export const makeSellOrder = async (exchange, token, web3, order, account, dispatch) => {
+	if (account !== '' && order !== null){
+		const tokenGet = ETHER_ADDRESS
+		const amountGet = web3.utils.toWei((order.amount * order.price).toString(), 'ether')
+		const tokenGive = token.options.address
+		const amountGive = web3.utils.toWei(order.amount.toString(), 'ether')
+
+		await exchange.methods.makeOrder(tokenGet, amountGet, tokenGive, amountGive)
+								.send({from: account})
+								.on('transactionHash', (hash) =>{
+									dispatch(sellOrderMaking())
+								}).on('error', (error) =>{
+									console.log(error)
+									// window.alert("Could not make sell order. Try again.")
+								})
+	}
+	
+
+}
+
 // smart contract event listener
 export const subscribeToEvents = async(exchange, dispatch)=>{
 	await exchange.events.Cancel({}, (error, event) =>{
@@ -205,6 +246,9 @@ export const subscribeToEvents = async(exchange, dispatch)=>{
 	})
 	await exchange.events.Withdraw({}, (error, event) =>{
 		dispatch(balancesLoaded())
+	})
+	await exchange.events.Order({}, (error, event) =>{
+		dispatch(orderMade(event.returnValues))
 	})
 }
 
