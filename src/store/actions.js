@@ -70,10 +70,69 @@ export function orderFilled(order){
 	}
 }
 
+export function ethBalanceLoaded(balance){
+	return{
+		type: 'ETH_BALANCE_LOADED',
+		balance
+	}
+}
 
+export function tokenBalanceLoaded(balance){
+	return{
+		type: 'TOKEN_BALANCE_LOADED',
+		balance
+	}
+}
+export function exchangeEthBalanceLoaded(balance){
+	return{
+		type: 'EXCHANGE_ETH_BALANCE_LOADED',
+		balance
+	}
+}
+export function exchangeTokenBalanceLoaded(balance){
+	return{
+		type: 'EXCHANGE_TOKEN_BALANCE_LOADED',
+		balance
+	}
+}
 
+export function balancesLoaded(){
+	return{
+		type: 'BALANCES_LOADED'
+	}
+}
+export function balancesLoading(){
+	return{
+		type: 'BALANCES_LOADING'
+	}
+}
 
+export function ethDepositAmountChanged(amount){
+	return {
+		type: 'ETH_DEPOSIT_AMOUNT_CHANGED',
+		amount
+	}
+}
+export function ethWithdrawAmountChanged(amount){
+	return {
+		type: 'ETH_WITHDRAW_AMOUNT_CHANGED',
+		amount
+	}
+}
 
+export function tokenDepositAmountChanged(amount){
+	return {
+		type: 'TOKEN_DEPOSIT_AMOUNT_CHANGED',
+		amount
+	}
+}
+
+export function tokenWithdrawAmountChanged(amount){
+	return {
+		type: 'TOKEN_WITHDRAW_AMOUNT_CHANGED',
+		amount
+	}
+}
 
 
 
