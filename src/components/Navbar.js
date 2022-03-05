@@ -40,7 +40,7 @@ class Navbar extends Component {
         <div className = "nav-link-hover">
 
           <ul className="navbar-nav px-2">
-              <li className="navbar-item text-nowrap d-none d-sm-none d-sm-block">
+              <li className="navbar-item text-nowrap d-sm-block">
                   {this.props.account !== ''
                       ? <><img
                     className="mr-2"
@@ -75,7 +75,8 @@ class Navbar extends Component {
                       <small className="text-secondary">
                         <small 
                           id="account" 
-                          style={{color: 'white'}}>{this.props.account? this.props.account: ""}
+                          className="text-muted"
+                          >{this.props.account? this.props.account: ""}
                         </small>
                       </small>
                       
