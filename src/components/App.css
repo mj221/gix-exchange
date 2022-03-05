@@ -1,7 +1,7 @@
 .content  {
   background-color: #1d1d1d;
   position: absolute;
-  top: 42px;
+  top: 45px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -186,6 +186,19 @@ tr.order-book-order {
   /*max-width: 20px !important;*/
 }
 .balance-tab-config{
+  color: white !important;
+  height: 33px !important;
+  font-size: 10px;
+  /*max-width: 20px !important;*/
+}
+.newOrder-tab-config.active{
+  color: white !important;
+  background-color: #1d1d1d !important;
+  height: 33px !important;
+  font-size: 10px;
+  /*max-width: 20px !important;*/
+}
+.newOrder-tab-config{
   color: white !important;
   height: 33px !important;
   font-size: 10px;
