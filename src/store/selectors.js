@@ -394,6 +394,33 @@ const tokenWithdrawAmount = state => get(state, 'exchange.tokenWithdrawAmount', 
 export const tokenWithdrawAmountSelector = createSelector(tokenWithdrawAmount, amount=>amount)
 
 
+// buy order and sell orders
+const buyOrderMaking = state => get(state, 'exchange.buyOrder.making', false)
+export const buyOrderMakingSelector = createSelector(buyOrderMaking, making => making)
+
+const sellOrderMaking = state => get(state, 'exchange.sellOrder.making', false)
+export const sellOrderMakingSelector = createSelector(sellOrderMaking, making => making)
+
+const buyOrder = state => get(state, 'exchange.buyOrder', null)
+export const buyOrderSelector = createSelector(buyOrder, bo => bo)
+
+const sellOrder = state => get(state, 'exchange.sellOrder', null)
+export const sellOrderSelector = createSelector(sellOrder, so => so)
+
+const buyOrderAmount = state => get(state, 'exchange.buyOrder.amount', 0)
+export const buyOrderAmountSelector = createSelector(buyOrderAmount, b => b)
+
+const buyOrderPrice = state => get(state, 'exchange.buyOrder.price', 0)
+export const buyOrderPriceSelector = createSelector(buyOrderPrice, b => b)
+
+const sellOrderAmount = state => get(state, 'exchange.sellOrder.amount', 0)
+export const sellOrderAmountSelector = createSelector(sellOrderAmount, s => s)
+
+const sellOrderPrice = state => get(state, 'exchange.sellOrder.price', 0)
+export const sellOrderPriceSelector = createSelector(sellOrderPrice, s => s)
+
+
+
 
 
 
