@@ -10,11 +10,21 @@ import {
 	orderCancelling,
 	orderCancelled,
 	orderFilling,
-	orderFilled
+	orderFilled,
+	ethBalanceLoaded,
+	tokenBalanceLoaded,
+	exchangeEthBalanceLoaded,
+	exchangeTokenBalanceLoaded,
+	balancesLoaded,
+	balancesLoading
 } from './actions'
 
 import Exchange from '../abis/Exchange.json'
 import PoiToken from '../abis/PoiToken.json'
+
+import {
+	ETHER_ADDRESS
+} from '../helpers'
 
 export const loadWeb3 = async (dispatch) =>{
 	
@@ -98,6 +108,90 @@ export const fillOrder = async (exchange, order, account, dispatch) => {
 					})
 }
 
+export const loadBalances = async(web3, exchange, token, account, dispatch) => {
+	if (account !== ''){
+		const ethBalance = await web3.eth.getBalance(account)
+		dispatch(ethBalanceLoaded(ethBalance))
+
+		const tokenBalance = await token.methods.balanceOf(account).call()
+		dispatch(tokenBalanceLoaded(tokenBalance))
+
+		const exchangeEthBalance = await exchange.methods.balanceOf(ETHER_ADDRESS, account).call()
+		dispatch(exchangeEthBalanceLoaded(exchangeEthBalance))
+
+		const exchangeTokenBalance = await exchange.methods.balanceOf(token.options.address, account).call()
+		dispatch(exchangeTokenBalanceLoaded(exchangeTokenBalance))
+	}else{
+		dispatch(ethBalanceLoaded(0))
+		dispatch(tokenBalanceLoaded(0))
+		dispatch(exchangeEthBalanceLoaded(0))
+		dispatch(exchangeTokenBalanceLoaded(0))
+	}
+	dispatch(balancesLoaded())
+	
+}
+
+export const depositEth = async(exchange, web3, ethDepositAmount, account, dispatch) =>{
+	if (account !== '' && ethDepositAmount !== null){
+		const ethAmount = web3.utils.toWei(ethDepositAmount.toString(), 'ether')
+		await exchange.methods.depositEther()
+								.send({from: account, value: ethAmount})
+								.on('transactionHash', (hash) =>{
+									dispatch(balancesLoading())
+								}).on('error', (error)=>{
+									console.log(error)
+									window.alert("Could not deposit Eth. Try again.")
+								})
+	}
+}
+export const withdrawEth = async(exchange, web3, ethWithdrawAmount, account, dispatch) =>{
+	if (account !== '' && ethWithdrawAmount !== null){
+		const ethAmount = web3.utils.toWei(ethWithdrawAmount.toString(), 'ether')
+		await exchange.methods.withdrawEther(ethAmount)
+								.send({from: account})
+								.on('transactionHash', (hash) =>{
+									dispatch(balancesLoading())
+								}).on('error', (error)=>{
+									console.log(error)
+									window.alert("Could not withdraw Eth. Try again.")
+								})
+	}
+}
+
+export const depositToken = async(exchange, web3, tokenDepositAmount, account, token, dispatch) =>{
+	if (account !== '' && tokenDepositAmount !== null){
+		const tokenAmount = web3.utils.toWei(tokenDepositAmount.toString(), 'ether')
+
+		await token.methods.approve(exchange.options.address, tokenAmount)
+							.send({from: account})
+							.on('transactionHash', async (hash) => {
+								await exchange.methods.depositToken(token.options.address, tokenAmount)
+								.send({from: account})
+								.on('transactionHash', (hash) =>{
+									dispatch(balancesLoading())
+								}).on('error', (error)=>{
+									console.log(error)
+									window.alert("Could not deposit token. Try again.")
+								})
+							}).on('error', (error) => {
+								window.alert("User cancelled. Try again.")
+							})
+	}
+}
+export const withdrawToken = async(exchange, web3, tokenWithdrawAmount, account, token, dispatch) =>{
+	if (account !== '' && tokenWithdrawAmount !== null){
+		const tokenAmount = web3.utils.toWei(tokenWithdrawAmount.toString(), 'ether')
+		await exchange.methods.withdrawToken(token.options.address, tokenAmount)
+								.send({from: account})
+								.on('transactionHash', (hash) =>{
+									dispatch(balancesLoading())
+								}).on('error', (error)=>{
+									console.log(error)
+									window.alert("Could not withdraw token. Try again.")
+								})
+	}
+}
+
 // smart contract event listener
 export const subscribeToEvents = async(exchange, dispatch)=>{
 	await exchange.events.Cancel({}, (error, event) =>{
@@ -106,6 +200,24 @@ export const subscribeToEvents = async(exchange, dispatch)=>{
 	await exchange.events.Trade({}, (error, event) => {
 		dispatch(orderFilled(event.returnValues))
 	})
+	await exchange.events.Deposit({}, (error, event) =>{
+		dispatch(balancesLoaded())
+	})
+	await exchange.events.Withdraw({}, (error, event) =>{
+		dispatch(balancesLoaded())
+	})
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
