@@ -57,7 +57,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: nowrap
 }
 
@@ -164,5 +164,31 @@ tr.order-book-order {
 .account-etherscan:hover {
   text-decoration: none;
 }
-
+.transactions-tab-config.active{
+  color: white !important;
+  background-color: #1d1d1d !important;
+  height: 33px !important;
+  font-size: 10px;
+  /*border: 0 !important;*/
+}
+.transactions-tab-config{
+  color: white !important;
+  /*background-color: transparent !important;*/
+  height: 33px !important;
+  font-size: 10px;
+  /*border: 0 !important;*/
+}
+.balance-tab-config.active{
+  color: white !important;
+  background-color: #1d1d1d !important;
+  height: 33px !important;
+  font-size: 10px;
+  /*max-width: 20px !important;*/
+}
+.balance-tab-config{
+  color: white !important;
+  height: 33px !important;
+  font-size: 10px;
+  /*max-width: 20px !important;*/
+}
 
