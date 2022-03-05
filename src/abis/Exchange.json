@@ -23518,12 +23518,12 @@
     "1337": {
       "events": {},
       "links": {},
-      "address": "0x68Bd1AA6D7e6D4F2CDFDC9184c6ffc5Ea2b31164",
-      "transactionHash": "0xd860f8af92a763657fa7080cd10377ae06fa639fa81048e37a8e1d66901d8121"
+      "address": "0xf6e265144cf21c19B4a674d5c26cE0E9f53B54de",
+      "transactionHash": "0x74e4dbb0dafafaf484a79c8f338b64fa1efb221bc7386945a2ade1130e8bb125"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2022-03-04T00:28:59.309Z",
+  "updatedAt": "2022-03-05T22:11:03.913Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
