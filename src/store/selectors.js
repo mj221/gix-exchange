@@ -6,7 +6,8 @@ import {
 	ETHER_ADDRESS, 
 	tokens, ether,
 	RED, GREEN,
-	addressIsEqual
+	addressIsEqual,
+	formatBalance
 } from '../helpers'
 
 
@@ -15,6 +16,9 @@ import {
 // export const accountSelector = createSelector(account, (account) => {account})
 const account = state => get(state, 'web3.account', '')
 export const accountSelector = createSelector(account, a => {return a})
+
+const web3 = state => get(state, 'web3.connection')
+export const web3Selector = createSelector(web3, w => w)
 
 /// Check if necessary contracts are loaded
 const tokenLoaded = state => get(state, 'token.loaded', false)  //default value false
@@ -33,6 +37,9 @@ export const contractLoadedSelector = createSelector(
 /////////
 const exchange = state => get(state, 'exchange.contract')
 export const exchangeSelector = createSelector(exchange, e => e)
+
+const token = state => get(state, 'token.contract')
+export const tokenSelector = createSelector(token, t => t)
 // 
 const allOrdersLoaded = state => get(state, 'exchange.allOrders.loaded', false)
 export const allOrdersLoadedSelector = createSelector(allOrdersLoaded, loaded => loaded)
@@ -331,13 +338,60 @@ const buildGraphData = orders =>{
 	})
 	return graphData
 }
-
+//////
 const orderCancelling = state => get(state, 'exchange.orderCancelling', false)
 export const orderCancellingSelector = createSelector(orderCancelling, status => status)
 
 const orderFilling= state => get(state, 'exchange.orderFilling', false)
 export const orderFillingSelector = createSelector(orderFilling, status => status)
 
+//////
+const balancesLoading = state => get(state, 'exchange.balancesLoading', true)
+export const balancesLoadingSelector = createSelector(balancesLoading, loading => loading)
+
+const ethBalance = state => get(state, 'web3.balance', 0)
+export const ethBalanceSelector = createSelector(
+	ethBalance,
+	(balance) =>{
+		return formatBalance(balance.toString())
+	}
+)
+
+const tokenBalance = state => get(state, 'token.balance', 0)
+export const tokenBalanceSelector = createSelector(
+	tokenBalance,
+	balance =>{
+		return formatBalance(balance.toString())
+	}
+)
+
+const exchangeEthBalance = state => get(state, 'exchange.ethBalance', 0)
+export const exchangeEthBalanceSelector = createSelector(
+	exchangeEthBalance,
+	balance =>{
+		return formatBalance(balance.toString())
+	}
+)
+
+const exchangeTokenBalance = state => get(state, 'exchange.tokenBalance', 0)
+export const exchangeTokenBalanceSelector = createSelector(
+	exchangeTokenBalance,
+	balance =>{
+		return formatBalance(balance.toString())
+	}
+)
+
+const ethDepositAmount = state => get(state, 'exchange.ethDepositAmount', null)
+export const ethDepositAmountSelector = createSelector(ethDepositAmount, amount=>amount)
+
+const ethWithdrawAmount = state => get(state, 'exchange.ethWithdrawAmount', null)
+export const ethWithdrawAmountSelector = createSelector(ethWithdrawAmount, amount=>amount)
+
+const tokenDepositAmount = state => get(state, 'exchange.tokenDepositAmount', null)
+export const tokenDepositAmountSelector = createSelector(tokenDepositAmount, amount=>amount)
+
+const tokenWithdrawAmount = state => get(state, 'exchange.tokenWithdrawAmount', null)
+export const tokenWithdrawAmountSelector = createSelector(tokenWithdrawAmount, amount=>amount)
 
 
 
