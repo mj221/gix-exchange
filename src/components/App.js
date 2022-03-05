@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import React, { Component, useState } from 'react';
 // import detectEthereumProvider from '@metamask/detect-provider'
 
 import './App.css';
@@ -20,14 +19,6 @@ import {contractLoadedSelector} from '../store/selectors'
 
 const ethereum = window.ethereum
 
-// function App() {
-//   const[count , setCount]=useState(0);
-//   return (
-//     <div className="App">
-      
-//     </div>
-//   );
-// }
 class App extends Component {
   componentDidMount = async () =>{
     if(ethereum){
@@ -48,7 +39,7 @@ class App extends Component {
         if (accounts[0] != null){
           await loadAccount(accounts[0], this.props.dispatch)
         } else{
-          this.setState({account: ''})
+          // this.setState({account: ''})
           await loadAccount('', this.props.dispatch)
         }
         this.loadBlockchainData(this.props.dispatch)
@@ -102,7 +93,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      account: '',
+      account: ''
     }
   }
   render(){
@@ -110,7 +101,7 @@ class App extends Component {
       <div>
         <Navbar configMetaMask= {this.configMetaMask.bind(this)}/>
         {this.props.contractLoaded
-          ? <Content />
+          ? <Content/>
           : <div style={{height: '100vh', backgroundColor: '#1d1d1d', color: 'white'}}><Loader type="Initialiser"/></div>
         }
       </div>
