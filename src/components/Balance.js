@@ -86,7 +86,13 @@ const showForm = (props) =>{
 						<input
 							type="text"
 							placeholder = "ETH Amount"
-							onChange={(e) => dispatch(ethDepositAmountChanged(e.target.value))}
+							onChange={(event) => {if (isNaN(Number(event.target.value))) {
+													            return;
+													          } else {
+													            dispatch(ethDepositAmountChanged(event.target.value))
+													          }
+
+																		}}
 							className="form-control form-control-sm bg-dark text-white"
 							required
 						>
@@ -97,7 +103,7 @@ const showForm = (props) =>{
 							onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
 							onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
 							style={{backgroundColor: '#1d1d1d', color:'white'}} 
-							type="submit" className="btn btn-block btn-sm balance-button"
+							type="submit" className="btn btn-block btn-sm"
 							onClick={() => account === '' ? configMetaMask(dispatch) : null}
 							>
 							Deposit
@@ -126,7 +132,13 @@ const showForm = (props) =>{
 						<input
 							type="text"
 							placeholder = "POI Amount"
-							onChange={(e) => dispatch(tokenDepositAmountChanged(e.target.value))}
+							onChange={(event) => {if (isNaN(Number(event.target.value))) {
+													            return;
+													          } else {
+													            dispatch(tokenDepositAmountChanged(event.target.value))
+													          }
+
+																		}}
 							className="form-control form-control-sm bg-dark text-white"
 							required
 						>
@@ -137,7 +149,7 @@ const showForm = (props) =>{
 							onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
 							onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
 							style={{backgroundColor: '#1d1d1d', color:'white'}} 
-							type="submit" className="btn btn-block btn-sm balance-button"
+							type="submit" className="btn btn-block btn-sm"
 							onClick={() => account === '' ? configMetaMask(dispatch) : null}
 							>
 							Deposit
@@ -176,7 +188,13 @@ const showForm = (props) =>{
 						<input
 							type="text"
 							placeholder = "ETH Amount"
-							onChange={(e) => dispatch(ethWithdrawAmountChanged(e.target.value))}
+							onChange={(event) => {if (isNaN(Number(event.target.value))) {
+													            return;
+													          } else {
+													            dispatch(ethWithdrawAmountChanged(event.target.value))
+													          }
+
+																		}}
 							className="form-control form-control-sm bg-dark text-white"
 							required
 						>
@@ -214,7 +232,13 @@ const showForm = (props) =>{
 						<input
 							type="text"
 							placeholder = "POI Amount"
-							onChange={(e) => dispatch(tokenWithdrawAmountChanged(e.target.value))}
+							onChange={(event) => {if (isNaN(Number(event.target.value))) {
+													            return;
+													          } else {
+													            dispatch(tokenWithdrawAmountChanged(event.target.value))
+													          }
+
+																		}}
 							className="form-control form-control-sm bg-dark text-white"
 							required
 						>
