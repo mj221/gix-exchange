@@ -26,6 +26,7 @@ export function exchangeLoaded(contract){
 	}
 }
 
+// orders: cancelled, filled, all
 export function cancelledOrdersLoaded(orders){
 	return {
 		type: 'CANCELLED_ORDERS_LOADED',
@@ -70,6 +71,7 @@ export function orderFilled(order){
 	}
 }
 
+// eth and token balances
 export function ethBalanceLoaded(balance){
 	return{
 		type: 'ETH_BALANCE_LOADED',
@@ -107,6 +109,7 @@ export function balancesLoading(){
 	}
 }
 
+// deposit and withdrawals for eth and token
 export function ethDepositAmountChanged(amount){
 	return {
 		type: 'ETH_DEPOSIT_AMOUNT_CHANGED',
@@ -133,6 +136,57 @@ export function tokenWithdrawAmountChanged(amount){
 		amount
 	}
 }
+
+// buy orders
+export function buyOrderMaking(price){
+	return {
+		type: 'BUY_ORDER_MAKING',
+		price
+	}
+}
+export function buyOrderAmountChanged(amount){
+	return {
+		type: 'BUY_ORDER_AMOUNT_CHANGED',
+		amount
+	}
+}
+export function buyOrderPriceChanged(price){
+	return {
+		type: 'BUY_ORDER_PRICE_CHANGED',
+		price
+	}
+}
+//sell orders
+export function sellOrderAmountChanged(amount){
+	return {
+		type: 'SELL_ORDER_AMOUNT_CHANGED',
+		amount
+	}
+}
+export function sellOrderPriceChanged(price){
+	return {
+		type: 'SELL_ORDER_PRICE_CHANGED',
+		price
+	}
+}
+
+export function sellOrderMaking(price){
+	return {
+		type: 'SELL_ORDER_MAKING',
+		price
+	}
+}
+//order made
+export function orderMade(order){
+	return {
+		type: 'ORDER_MADE',
+		order
+	}
+}
+
+
+
+
 
 
 
