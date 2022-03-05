@@ -10,7 +10,7 @@ const showFilledOrders = (filledOrders) =>{
     <tbody>
       { filledOrders.map((order) => {
         return(
-          <tr className={`order-${order.id}`} key={order.id}>
+          <tr style={{fontSize: '13px'}} className={`order-${order.id}`} key={order.id}>
             <td className= "text-muted">{order.formattedTimeStamp}</td>
             <td>{order.tokenAmount}</td>
             <td className={`text-${order.tokenPriceClass}`}>{order.tokenPrice}</td>
@@ -39,7 +39,7 @@ class Trades extends Component {
           <table className="table table-dark table-sm small table-hover">
             <thead> 
               <tr>
-                <th> Time Executed</th>
+                <th> Time</th>
                 <th> POI </th>
                 <th> POI/ETH </th>
               </tr>
