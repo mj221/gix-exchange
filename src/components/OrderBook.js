@@ -5,7 +5,8 @@ import {
   orderBookLoaded,
   orderBookSelector,
   accountSelector,
-  exchangeSelector
+  exchangeSelector,
+  orderFillingSelector
 } from '../store/selectors'
 
 import {fillOrder} from '../store/interactions'
@@ -28,6 +29,7 @@ const renderOrder = (order, props) =>{
       <tr 
         key={order.id} 
         className="order-book-order" 
+        style={{fontSize: '13px'}}
         onClick={(e) => fillOrder(exchange, order, account, dispatch)}
       >
         <td>{order.tokenAmount}</td>
@@ -61,7 +63,7 @@ class OrderBook extends Component {
         <div className="card-header d-flex align-items-center">
           
           <span>Order Book</span>
-          {this.props.orderBookLoaded
+          {this.props.orderBookLoaded & !this.props.orderFilling
             ?<span></span>
             :<Loader type="header"/>
           }
@@ -87,7 +89,8 @@ function mapStateToProps(state){
     orderBookLoaded: orderBookLoaded(state),
     orderBook: orderBookSelector(state),
     account: accountSelector(state),
-    exchange: exchangeSelector(state)
+    exchange: exchangeSelector(state),
+    orderFilling: orderFillingSelector(state)
   }
 }
 export default connect(mapStateToProps)(OrderBook);
