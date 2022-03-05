@@ -1,10 +1,11 @@
 import React, { Component} from 'react'
-import {Tabs, Tab} from 'react-bootstrap'
+import {connect} from 'react-redux'
 
+import {Tabs, Tab} from 'react-bootstrap'
 import Loader from './Loader'
 
-import {connect} from 'react-redux'
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
 	myFilledOrdersLoadedSelector, 
@@ -24,7 +25,7 @@ const showMyFilledOrders = (myfilledOrders) =>{
     <tbody>
       { myfilledOrders.map((order) => {
         return(
-          <tr className={`order-${order.id}`} key={order.id}>
+          <tr style={{fontSize: '13px'}} className={`order-${order.id}`} key={order.id}>
             <td className= "text-muted">{order.formattedTimeStamp}</td>
             <td className={`text-${order.orderTypeClass}`}>{order.orderSignClass}{order.tokenAmount}</td>
             <td className={`text-${order.orderTypeClass}`}>{order.tokenPrice}</td>
@@ -81,8 +82,8 @@ class MyTransactions extends Component{
           }
 				</div>
 				<div className="card-body">
-					<Tabs defaultActiveKey="trades" className="bg-dark text-white">
-						<Tab eventKey="trades" title="Trades" className="bg-dark">
+					<Tabs fill justify defaultActiveKey="trades" className="bg-dark text-white">
+						<Tab tabClassName="transactions-tab-config" eventKey="trades" title="Trades" className="bg-dark text-white">
 							<table className="table table-dark table-sm small table-hover">
 								<thead>
 									<tr>
@@ -97,7 +98,7 @@ class MyTransactions extends Component{
 		            }
 							</table>
 						</Tab>
-						<Tab eventKey="orders" title="Orders">
+						<Tab tabClassName="transactions-tab-config" eventKey="orders" title="Orders">
 							<table className="table table-dark table-sm small table-hover">
 								<thead>
 									<tr>
