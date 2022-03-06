@@ -36,7 +36,7 @@ class PriceChart extends Component{
 	render() {
 		return(
 			<div className="card bg-dark text-white">
-				<div className="card-header d-flex align-items-center">
+				<div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
 					<span>Price Chart</span>
           {this.props.priceChartLoaded
             ?<span></span>

@@ -24,7 +24,7 @@ class Trades extends Component {
     return(
       <div className="card bg-dark text-white">
 
-        <div className="card-header d-flex align-items-center">
+        <div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
           
           <span>Trades</span>
           {this.props.filledOrdersLoaded
