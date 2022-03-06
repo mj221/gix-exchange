@@ -204,4 +204,7 @@ tr.order-book-order {
   font-size: 10px;
   /*max-width: 20px !important;*/
 }
-
+.table-border{
+  border-width: 1px;
+  border-top-style: solid !important;
+}
