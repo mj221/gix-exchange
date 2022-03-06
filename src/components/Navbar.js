@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 import {Tooltip, OverlayTrigger} from 'react-bootstrap'
 import gixLogo from '../gix-logo2.png'
+
 import './App.css'
 
 import {connect} from 'react-redux'
@@ -21,18 +22,20 @@ class Navbar extends Component {
       width: 30,
       height: 30,
       borderRadius: 30 / 8,
-      overflow: "hidden"
+      overflow: "hidden",
+      marginRight: '10px'
     }
     return (
       <nav className="navbar navbar-dark fixed-top bg-dark flex-nowrap p-0 shadow">
         
         <a
-          className="navbar-brand col-sm-3 col-md-2 mr-0"
+          className="navbar-brand col-sm-3 col-md-2 mt-1"
+          style = {{marginLeft: '10px'}}
           href="."
           rel="noopener noreferrer"
         >
           <div className= "nav-link-hover">
-            <img src={gixLogo} height="30" className="mb-1 mr-2" alt="" />
+            <img src={gixLogo} height="30" className="mb-1 mr-2" style = {{color: 'white', marginRight: '10px', marginBottom: '10px'}}alt="" />
             Exchange
           </div>
         </a>
@@ -40,17 +43,16 @@ class Navbar extends Component {
         <div className = "nav-link-hover">
 
           <ul className="navbar-nav px-2">
-              <li className="navbar-item text-nowrap d-sm-block">
+              <li className="navbar-item text-nowrap d-sm-block ">
                   {this.props.account !== ''
                       ? <><img
-                    className="mr-2"
                     style = {identiconStyle}
                     width='30'
                     height='30'
                     onClick= {() => window.open(`https://etherscan.io/address/${this.props.account}`, "_blank")}
                     rel="noopener noreferrer"
-                    src={`data:image/png;base64,${new Identicon(this.props.account, {size: 30,background: [0, 0, 0, 100], foreground: [255, 255, 255, 255]}).toString()}`}
-                    alt="" /><span className="textshadow mr-1" style = {{color: 'white'}}>|</span></>
+                    src={`data:image/png;base64,${new Identicon(this.props.account, {size: 30,background: [10, 10, 10, 50], foreground: [255, 255, 255, 255]}).toString()}`}
+                    alt="" /><span className="textshadow" style = {{color: 'white', marginRight: '5px'}}>|</span></>
                       :<span><button 
                                 className="btn btn-light"
                                 onClick={()=>{
@@ -75,7 +77,7 @@ class Navbar extends Component {
                       <small className="text-secondary">
                         <small 
                           id="account" 
-                          className="text-muted"
+                          style={{color: 'white'}}
                           >{this.props.account? this.props.account: ""}
                         </small>
                       </small>
