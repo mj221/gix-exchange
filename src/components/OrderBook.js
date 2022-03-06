@@ -60,7 +60,7 @@ class OrderBook extends Component {
     return(
       <div className="card bg-dark text-white">
 
-        <div className="card-header d-flex align-items-center">
+        <div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
           
           <span>Order Book</span>
           {this.props.orderBookLoaded & !this.props.orderFilling
