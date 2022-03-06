@@ -7,6 +7,8 @@ import Content from './Content'
 
 import Loader from './Loader'
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import {
   loadWeb3, 
   loadAccount, 
