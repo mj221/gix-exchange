@@ -82,7 +82,7 @@ const showForm = (props) =>{
 					depositEth(exchange, web3, ethDepositAmount, account, dispatch)
 
 				}}>
-					<div className="col-12 col-sm pr-sm-2">
+					<div className="col-sm d-flex">
 						<input
 							type="text"
 							placeholder = "ETH Amount"
@@ -97,23 +97,25 @@ const showForm = (props) =>{
 							required
 						>
 						</input>
+						<div>
+							<button 
+								onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
+								onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
+								style={{backgroundColor: '#1d1d1d', color:'white'}} 
+								type="submit" className="btn btn-block btn-sm"
+								onClick={() => account === '' ? configMetaMask(dispatch) : null}
+								>
+								Deposit
+							</button>
+						</div>
 					</div>
-					<div className="col-12 col-sm-auto pl-sm-0">
-						<button 
-							onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
-							onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
-							style={{backgroundColor: '#1d1d1d', color:'white'}} 
-							type="submit" className="btn btn-block btn-sm"
-							onClick={() => account === '' ? configMetaMask(dispatch) : null}
-							>
-							Deposit
-						</button>
-					</div>
+					
 				</form>
 
 				<hr/>
 			{/*TOKEN DEPOSITS*/}
-				<table className="table table-dark table-sm small table-hover">
+				<table className="table table-dark table-sm small table-hover table-border">
+
 					<tbody>
 						<tr>
 							<td>POI</td>
@@ -128,7 +130,7 @@ const showForm = (props) =>{
 					depositToken(exchange, web3, tokenDepositAmount, account, token, dispatch)
 
 				}}>
-					<div className="col-12 col-sm pr-sm-2">
+					<div className="col-sm d-flex">
 						<input
 							type="text"
 							placeholder = "POI Amount"
@@ -143,24 +145,24 @@ const showForm = (props) =>{
 							required
 						>
 						</input>
-					</div>
-					<div className="col-12 col-sm-auto pl-sm-0">
-						<button 
-							onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
-							onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
-							style={{backgroundColor: '#1d1d1d', color:'white'}} 
-							type="submit" className="btn btn-block btn-sm"
-							onClick={() => account === '' ? configMetaMask(dispatch) : null}
-							>
-							Deposit
-						</button>
+						<div>
+							<button 
+								onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
+								onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
+								style={{backgroundColor: '#1d1d1d', color:'white'}} 
+								type="submit" className="btn btn-block btn-sm"
+								onClick={() => account === '' ? configMetaMask(dispatch) : null}
+								>
+								Deposit
+							</button>
+						</div>
 					</div>
 				</form>
 
 			</Tab>
 		{/*------------------------------------------------*/}
 	{/*WITHDRAWALS*/}
-			<Tab tabClassName="balance-tab-config" eventKey="withdraw" title="Withdraw">
+			<Tab style={{ textAlign: "center" }} tabClassName="balance-tab-config" eventKey="withdraw" title="Withdraw">
 				<table className="table table-dark table-sm small table-hover">
 					<thead>
 						<tr>
@@ -184,7 +186,7 @@ const showForm = (props) =>{
 					withdrawEth(exchange, web3, ethWithdrawAmount, account, dispatch)
 
 				}}>
-					<div className="col-12 col-sm pr-sm-2">
+					<div className="col-sm d-flex">
 						<input
 							type="text"
 							placeholder = "ETH Amount"
@@ -199,21 +201,22 @@ const showForm = (props) =>{
 							required
 						>
 						</input>
+						<div>
+							<button 
+								onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
+								onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
+								style={{backgroundColor: '#1d1d1d', color:'white'}} 
+								type="submit" className="btn btn-block btn-sm balance-button"
+								onClick={() => account === '' ? configMetaMask(dispatch) : null}
+								>
+								Withdraw
+							</button>
+						</div>
 					</div>
-					<div className="col-12 col-sm-auto pl-sm-0">
-						<button 
-							onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
-							onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
-							style={{backgroundColor: '#1d1d1d', color:'white'}} 
-							type="submit" className="btn btn-block btn-sm balance-button"
-							onClick={() => account === '' ? configMetaMask(dispatch) : null}
-							>
-							Withdraw
-						</button>
-					</div>
+					
 				</form>
 				<hr/>
-				<table className="table table-dark table-sm small table-hover">
+				<table className="table table-dark table-sm small table-hover table-border">
 					<tbody>
 						<tr>
 							<td>POI</td>
@@ -228,7 +231,7 @@ const showForm = (props) =>{
 					withdrawToken(exchange, web3, tokenWithdrawAmount, account, token, dispatch)
 
 				}}>
-					<div className="col-12 col-sm pr-sm-2">
+					<div className="d-flex">
 						<input
 							type="text"
 							placeholder = "POI Amount"
@@ -243,18 +246,19 @@ const showForm = (props) =>{
 							required
 						>
 						</input>
+						<div>
+							<button 
+								onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
+								onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
+								style={{backgroundColor: '#1d1d1d', color:'white'}} 
+								type="submit" className="btn btn-block btn-sm balance-button"
+								onClick={() => account === '' ? configMetaMask(dispatch) : null}
+								>
+								Withdraw
+							</button>
+						</div>
 					</div>
-					<div className="col-12 col-sm-auto pl-sm-0">
-						<button 
-							onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
-							onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
-							style={{backgroundColor: '#1d1d1d', color:'white'}} 
-							type="submit" className="btn btn-block btn-sm balance-button"
-							onClick={() => account === '' ? configMetaMask(dispatch) : null}
-							>
-							Withdraw
-						</button>
-					</div>
+					
 				</form>
 			</Tab>
 		</Tabs>
@@ -313,7 +317,7 @@ class Balance extends Component{
 
 		return (
 			<div className="card bg-dark text-white">
-				<div className="card-header d-flex align-items-center">
+				<div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
 					<span>Balance</span>
           {!this.props.balancesLoading
             ?<span></span>
