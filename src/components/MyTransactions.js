@@ -5,7 +5,7 @@ import {Tabs, Tab} from 'react-bootstrap'
 import Loader from './Loader'
 
 import './App.css';
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 import {
 	myFilledOrdersLoadedSelector, 
@@ -74,7 +74,7 @@ class MyTransactions extends Component{
 	render(){
 		return (
 			<div className="card bg-dark text-white">
-				<div className="card-header d-flex align-items-center">
+				<div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
 					<span>My Transactions</span>
           {this.props.myFilledOrdersLoaded && this.props.myOpenOrdersLoaded && !this.props.orderCancelling
             ?<span></span>
