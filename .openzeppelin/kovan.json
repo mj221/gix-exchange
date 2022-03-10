@@ -1,0 +1,134 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0x907E0f37d78a9C206a1EfF55bEB9C574E02af53F",
+    "txHash": "0xe70e010740e010b28987079b9b7152f94b0d24dc63e8db03092a04d5687a2cc2"
+  },
+  "proxies": [
+    {
+      "address": "0x2845ee6026a8181D3372Ec547Cdc4E62daC7e840",
+      "txHash": "0xe88c093ff4865a3a6970cf832e4e09b37bed45bbc6d049726446aa75664baa3a",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "05e184ad0daf21d45bf1b819cb5fbddf865e62862a252db79139e0768a646f21": {
+      "address": "0xc5C06DD50d34246470F957b1c2E3D3a3bB8F6819",
+      "txHash": "0x703639597e59e451ff86885a7468ba6bd172345cf8f9e793395e6decf19f05ea",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "../../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:39"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "../../@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:44"
+          },
+          {
+            "contract": "Exchange",
+            "label": "feeAccount",
+            "type": "t_address",
+            "src": "../../project:/src/contracts/Exchange.sol:8"
+          },
+          {
+            "contract": "Exchange",
+            "label": "feePercent",
+            "type": "t_uint256",
+            "src": "../../project:/src/contracts/Exchange.sol:9"
+          },
+          {
+            "contract": "Exchange",
+            "label": "orderCount",
+            "type": "t_uint256",
+            "src": "../../project:/src/contracts/Exchange.sol:11"
+          },
+          {
+            "contract": "Exchange",
+            "label": "tokens",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))",
+            "src": "../../project:/src/contracts/Exchange.sol:13"
+          },
+          {
+            "contract": "Exchange",
+            "label": "orders",
+            "type": "t_mapping(t_uint256,t_struct$__Order)1151_storage)",
+            "src": "../../project:/src/contracts/Exchange.sol:14"
+          },
+          {
+            "contract": "Exchange",
+            "label": "orderCancelled",
+            "type": "t_mapping(t_uint256,t_bool)",
+            "src": "../../project:/src/contracts/Exchange.sol:15"
+          },
+          {
+            "contract": "Exchange",
+            "label": "orderFilled",
+            "type": "t_mapping(t_uint256,t_bool)",
+            "src": "../../project:/src/contracts/Exchange.sol:16"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(address => mapping(address => uint256))"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_uint256,t_struct$__Order)1151_storage)": {
+            "label": "mapping(uint256 => struct Exchange._Order)"
+          },
+          "t_struct$__Order)1151_storage": {
+            "label": "struct Exchange._Order",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint256"
+              },
+              {
+                "label": "user",
+                "type": "t_address"
+              },
+              {
+                "label": "tokenGet",
+                "type": "t_address"
+              },
+              {
+                "label": "amountGet",
+                "type": "t_uint256"
+              },
+              {
+                "label": "tokenGive",
+                "type": "t_address"
+              },
+              {
+                "label": "amountGive",
+                "type": "t_uint256"
+              },
+              {
+                "label": "timestamp",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_mapping(t_uint256,t_bool)": {
+            "label": "mapping(uint256 => bool)"
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        }
+      }
+    }
+  }
+}

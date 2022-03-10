@@ -27,6 +27,7 @@ module.exports = async function(callback) {
 
     const sender = accounts[0]
     const receiver = accounts[1]
+
     let amount = web3.utils.toWei('10000', 'ether')
 
     await poitoken.transfer(receiver, amount, {from: sender})

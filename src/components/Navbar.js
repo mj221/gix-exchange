@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 import {Tooltip, OverlayTrigger} from 'react-bootstrap'
-import gixLogo from '../gix-logo2.png'
+import gixLogo from '../assets/gix-logo2.png'
 
 import './App.css'
 

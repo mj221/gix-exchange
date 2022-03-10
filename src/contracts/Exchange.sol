@@ -2,7 +2,9 @@ pragma solidity ^0.8.11;
 
 import "./PoiToken.sol";
 
-contract Exchange {
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+
+contract Exchange is Initializable{
 	address public feeAccount; //account to receive exchange fees
 	uint256 public feePercent; // fee percentage
 	address constant ETHER = address(0); // Placeholder ether address
@@ -54,10 +56,15 @@ contract Exchange {
 		uint256 timestamp;
 	}
 
-	constructor(address _feeAccount, uint256 _feePercent) {
-		feeAccount = _feeAccount;
+	// constructor(address _feeAccount, uint256 _feePercent) {
+	// 	feeAccount = _feeAccount;
+	// 	feePercent = _feePercent;
+	// }
+
+	function initialize(address _feeAccount, uint256 _feePercent) public initializer {
+        feeAccount = _feeAccount;
 		feePercent = _feePercent;
-	}
+    }
 
 	// Fallback function to revert ether sent to this smart contract by mistake
 	fallback() external{

@@ -14,7 +14,8 @@ contract('Exchange', ([deployer, feeAccount, user1, user2]) => {
 
 	beforeEach(async()=>{
 		poitoken = await PoiToken.new()
-		exchange = await Exchange.new(feeAccount, feePercent)
+		exchange = await Exchange.new()
+		await exchange.initialize(feeAccount, feePercent)
 		poitoken.transfer(user1, tokens(100), {from: deployer})
 	})
 

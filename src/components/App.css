@@ -89,18 +89,6 @@
   margin-bottom: 8px;
 }
 
-/*Below does nothing*/
-/*Orderbook control*/
-.vertical-split: first-child > div:first-child{
-  height: 50%;
-  
-}
-/*Trades control*/
-.vertical-split: first-child > div:second-child{
-  height: 50%;
-}
-
-
 /*New order control*/
 .vertical-split:last-child > div:first-child{
   height: 50%;

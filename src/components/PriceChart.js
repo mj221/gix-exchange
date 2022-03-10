@@ -7,7 +7,7 @@ import {lightChartOptions} from './LightChart.config.js'
 
 
 import Loader from './Loader'
-import poiLogo from '../poi-logo.png'
+import poiLogo from '../assets/poi-logo.png'
 
 import {
 	priceChartLoadedSelector,
