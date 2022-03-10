@@ -11,6 +11,8 @@ import PriceChart from './PriceChart'
 import Balance from './Balance'
 import NewOrder from './NewOrder'
 
+import Footer from './Footer'
+
 class Content extends Component {
   componentDidMount(){
     this.loadBlockchainData(this.props)
@@ -22,38 +24,69 @@ class Content extends Component {
     await subscribeToEvents(exchange, dispatch)
   }
   render(){
-    return(
-      <div>
-        <div className="content"> 
-          {/*--------------------------------*/}
-          <div className="vertical-split">
+    // return(
+    //   <div>
+    //     <div className="content"> 
+    //       {/*--------------------------------*/}
+    //       <div className="vertical-split">
 
-            <Balance/>
+    //         <Balance/>
 
-            <NewOrder/>
+    //         <NewOrder/>
 
+    //       </div>
+    //       {/*--------------------------------*/}
+    //       <div className="vertical">
+    //         <OrderBook />
+    //       </div>
+    //       {/*--------------------------------*/}
+    //       <div className="vertical-split">
+
+    //         <PriceChart />
+
+    //         <MyTransactions />
+
+    //       </div>
+    //       {/*--------------------------------*/}
+    //       <div className="vertical">
+    //         <Trades />
+    //       </div>
+    //       {/*--------------------------------*/}
+    //     </div>
+    //     {/*--------------------------------*/}
+    //   </div>
+    // )
+    return (
+    
+
+        <div className="content-all">
+          {/*-----------------------*/}
+          <div className="content"> 
+            {/*----------*/}
+                <div className="vertical">
+                  <PriceChart />
+                </div>
+              
+                <div className="vertical-split">
+                  <OrderBook />
+                  <Trades />   
+                </div>
+                
+           
+                <div className="vertical-split">
+                  <NewOrder/>
+                  <Balance/>     
+                </div>
+                {/*----------*/}
           </div>
-          {/*--------------------------------*/}
-          <div className="vertical">
-            <OrderBook />
-          </div>
-          {/*--------------------------------*/}
-          <div className="vertical-split">
 
-            <PriceChart />
-
+          <div className="content2">
             <MyTransactions />
-
           </div>
-          {/*--------------------------------*/}
-          <div className="vertical">
-            <Trades />
-          </div>
-          {/*--------------------------------*/}
+          {/*----------------------*/}
+            <Footer/>
         </div>
-        {/*--------------------------------*/}
-      </div>
-    );
+    )
   }
 }
 

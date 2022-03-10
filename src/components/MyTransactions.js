@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import {connect} from 'react-redux'
 
 import {Tabs, Tab} from 'react-bootstrap'
-import Loader from './Loader'
+// import Loader from './Loader'
 
 import './App.css';
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,7 +14,9 @@ import {
 	myOpenOrdersSelector,
 	accountSelector,
 	exchangeSelector,
-	orderCancellingSelector
+	orderCancellingSelector,
+	myOrderHistoryLoadedSelector,
+	myOrderHistorySelector,
 
 } from '../store/selectors'
 
@@ -42,7 +44,8 @@ const showMyOpenOrders = (props) =>{
 		<tbody>
       { myOpenOrders.map((order) => {
         return(
-          <tr className={`order-${order.id}`} key={order.id}>
+          <tr style = {{verticalAlign: 'baseline'}} className={`order-${order.id}`} key={order.id}>
+          	<td className= "text-muted">{order.formattedTimeStamp}</td>
 	          <td style = {{verticalAlign: 'baseline'}} className={`text-${order.orderTypeClass}`}>{order.tokenAmount}</td>
             <td style = {{verticalAlign: 'baseline'}} className={`text-${order.orderTypeClass}`}>{order.tokenPrice}</td>
             <td 
@@ -52,7 +55,10 @@ const showMyOpenOrders = (props) =>{
 	        			<button 
 	        				key={order.id}
 	        				name={order.id}
+	        				style={{backgroundColor: '#1d1d1d', color:'white'}}
 	        				className="btn btn-dark btn-sm"
+	        				onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
+									onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
 	        				onClick={(event) => {
 	        					if(!orderCancelling){
 	        						cancelOrder(exchange, order, account, dispatch)
@@ -68,47 +74,84 @@ const showMyOpenOrders = (props) =>{
       })}
     </tbody>)
 }
+const showMyAllOrders = (myallOrders) =>{
+	return (
+		<tbody>
+			{myallOrders.map((order) => {
+				return (
+					<tr style={{fontSize: '13px'}} className={`order-${order.id}`} key={order.id}>
+            <td className= "text-muted">{order.formattedTimeStamp}</td>
+            <td className={`text-${order.orderTypeClass}`}>{order.orderType}</td>
+            <td>{order.tokenAmount}</td>
+            <td>{order.tokenPrice}</td>
+            <td>{order.orderStatus}</td>
+          </tr>
+				)
+			})}
+		</tbody>
+	)
+}
 
 class MyTransactions extends Component{
 
 	render(){
 		return (
 			<div className="card bg-dark text-white">
-				<div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
+				
+				{/*<div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
 					<span>My Transactions</span>
           {this.props.myFilledOrdersLoaded && this.props.myOpenOrdersLoaded && !this.props.orderCancelling
             ?<span></span>
             :<Loader type="header"/>
           }
-				</div>
+				</div>*/}
+
 				<div className="card-body">
-					<Tabs fill justify defaultActiveKey="trades" className="bg-dark text-white">
-						<Tab tabClassName="transactions-tab-config" eventKey="trades" title="Trades" className="bg-dark text-white">
+					<Tabs fill justify defaultActiveKey="open-orders" className="bg-dark text-white">
+						<Tab tabClassName="transactions-tab-config" eventKey="open-orders" title="Open Orders">
 							<table className="table table-dark table-sm small table-hover">
 								<thead>
-									<tr>
-										<th>Time Executed</th>
-										<th>POI</th>
-										<th>POI/ETH</th>
-									</tr>
-								</thead>
-								{this.props.myFilledOrdersLoaded
-		              ?showMyFilledOrders(this.props.myFilledOrders)
-		              :<tbody></tbody>
-		            }
-							</table>
-						</Tab>
-						<Tab tabClassName="transactions-tab-config" eventKey="orders" title="Orders">
-							<table className="table table-dark table-sm small table-hover">
-								<thead>
-									<tr>
-										<th>Amount</th>
-										<th>POI/ETH</th>
+									<tr className="text-muted" >
+										<th>Time</th>
+										<th>Filled Size/Order Size (POI)</th>
+										<th>Price (POI/ETH)</th>
 										<th></th>
 									</tr>
 								</thead>
 								{this.props.myOpenOrdersLoaded
 		              ?showMyOpenOrders(this.props)
+		              :<tbody></tbody>
+		            }
+							</table>
+						</Tab>
+						<Tab tabClassName="transactions-tab-config" eventKey="order-history" title="Order History">
+							<table className="table table-dark table-sm small table-hover">
+								<thead>
+									<tr className="text-muted">
+										<th>Time</th>
+										<th>Side</th>
+										<th>Filled Size/Order Size (POI)</th>
+										<th>Price (POI/ETH)</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								{this.props.myOpenOrdersLoaded
+		              ?showMyAllOrders(this.props.myOrderHistory)
+		              :<tbody></tbody>
+		            }
+							</table>
+						</Tab>
+						<Tab tabClassName="transactions-tab-config" eventKey="trade-history" title="Trade History" className="bg-dark text-white">
+							<table className="table table-dark table-sm small table-hover">
+								<thead>
+									<tr className="text-muted">
+										<th>Time</th>
+										<th>Filled Size/Order Size (POI)</th>
+										<th>Price (POI/ETH)</th>
+									</tr>
+								</thead>
+								{this.props.myFilledOrdersLoaded
+		              ?showMyFilledOrders(this.props.myFilledOrders)
 		              :<tbody></tbody>
 		            }
 							</table>
@@ -125,6 +168,8 @@ function mapStateToProps(state){
     myFilledOrders: myFilledOrdersSelector(state),
     myOpenOrdersLoaded: myOpenOrdersLoadedSelector(state),
     myOpenOrders: myOpenOrdersSelector(state),
+    myOrderHistoryLoaded: myOrderHistoryLoadedSelector(state),
+    myOrderHistory: myOrderHistorySelector(state),
     orderCancelling: orderCancellingSelector(state),
     account: accountSelector(state),
     exchange: exchangeSelector(state)

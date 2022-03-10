@@ -1,45 +1,52 @@
-.content  {
-  background-color: #1d1d1d;
-  position: absolute;
+.content-all{
   top: 45px;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  position: relative;
+  background-color: #1d1d1d;
+  padding:  8px;
+}
+
+.content{
   display: flex;
+  flex: 1;
   flex-direction: row;
-  flex-wrap: nowrap;
   align-items: stretch;
   justify-content: space-evenly;
-  padding: 8px;
-  z-index: 1
+  z-index: 1;
+  flex-wrap: nowrap;
+  height: 93vh;
 }
 
+/**/
 .content > div {
-  width: 20%;
-  padding-right: 8px
+  width: 100%;
+  height:  100%;
+  padding-right: 8px;
 }
-
+/*price chart*/
 .content > div:first-child {
-  min-width: 220px
+  width: 45%;
+  min-width: 240px;
 }
-
+/*orderbook, market trades*/
 .content > div:nth-child(2) {
-  min-width: 200px
+  width: 27.5%;
+  min-width: 200px;
 }
-
-.content  div:nth-child(3) {
-  width: 40%
-}
-
+/*deposit-withdrawal, buy/sell*/
 .content > div:last-child {
-  padding-right: 0;
-  min-width: 240px
+  width: 27.5%;
+  padding-right: 0px;
+  min-width: 200px;
 }
-
 @media (max-width:992px) {
-  .content {
+  .content-all{
     display: block;
     overflow-y: auto
+  }
+  .content {
+    display: block;
+    overflow-y: scroll
   }
 
   .content > div {
@@ -47,10 +54,20 @@
     padding-right: 0;
     padding-bottom: 8px
   }
+  .content > div:first-child{
+    height: 50vh;
+  }
+  .transactions-tab-config{
+    font-size: 10px !important;
+  }
+  .text-muted{
+    font-size: 10px !important;
+  }
 }
-
+/*price chart box control*/
 .vertical > div {
-  height: 100%
+  height: 100%;
+  background-color: #1d1d1d !important;
 }
 
 .vertical-split {
@@ -58,33 +75,64 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  flex-wrap: nowrap
+  flex-wrap: nowrap;
+  
 }
 
+/*controls all div in vertical split*/
 .vertical-split > div {
-  height: 50%
+  height: 50%;
+  /*margin-bottom: 8px;*/
 }
 
-.vertical-split > div:first-child {
-  margin-bottom: 8px
+.vertical-split:nth-child(2) > div:second-child{
+  margin-bottom: 8px;
 }
 
-.vertical-split:last-child > div:first-child {
-  height: 60%;
+/*Below does nothing*/
+/*Orderbook control*/
+.vertical-split: first-child > div:first-child{
+  height: 50%;
+  
+}
+/*Trades control*/
+.vertical-split: first-child > div:second-child{
+  height: 50%;
 }
 
-.vertical-split:last-child > div:last-child {
-  height: 40%
-}
 
-@media (max-width:992px) {
+/*New order control*/
+.vertical-split:last-child > div:first-child{
+  height: 50%;
+  padding-bottom: 0px;
+}
+/*Balance control*/
+.vertical-split:last-child > div:second-child{
+  width: 50%;
+}
+/*@media (max-width:992px) {
   .vertical-split {
     display: block
   }
   .vertical-split > div,
-  .vertical-split > div:first-child {
+  .vertical-split:first-child > div:first-child {
     height: auto
   }
+  .vertical-split:first-child > div:second-child {
+    height: 300px
+  }
+  .vertical-split:second-child > div:first-child {
+    height: auto
+  }
+  .vertical-split:second-child > div:second-child {
+    height: auto
+  }
+}*/
+
+.content2 > div{
+  height: 40vh;
+  margin-top: 8px;
+  min-width: 250px;
 }
 
 .card {
@@ -138,13 +186,14 @@
 
 .card-body .price-chart {
   height:100%;
-  padding-bottom: 30px;
+  padding-bottom: 0px;
 }
 
 .card-body .price-chart .price {
   padding-left: 20px;
 }
 
+/*------------------*/
 td.cancel-order {
   cursor: pointer;
 }
@@ -164,6 +213,7 @@ tr.order-book-order {
 .account-etherscan:hover {
   text-decoration: none;
 }
+/*-------*/
 .transactions-tab-config.active{
   color: white !important;
   background-color: #1d1d1d !important;
@@ -176,14 +226,30 @@ tr.order-book-order {
   /*background-color: transparent !important;*/
   height: 33px !important;
   font-size: 10px;
-  /*border: 0 !important;*/
+
 }
+.transactions-tab-config:hover{
+  color: black !important;
+  /*background-color: #1d1d1d !important;*/
+  /*height: 33px !important;*/
+}
+.transactions-tab-config.active:hover{
+  color: white !important;
+}
+/*-------*/
 .balance-tab-config.active{
   color: white !important;
   background-color: #1d1d1d !important;
   height: 33px !important;
   font-size: 10px;
+
   /*max-width: 20px !important;*/
+}
+.balance-tab-config.active:hover{
+  color: white !important;
+}
+.balance-tab-config:hover{
+  color: black !important;
 }
 .balance-tab-config{
   color: white !important;
@@ -191,11 +257,16 @@ tr.order-book-order {
   font-size: 10px;
   /*max-width: 20px !important;*/
 }
+/*------*/
 .newOrder-tab-config.active{
   color: white !important;
   background-color: #1d1d1d !important;
   height: 33px !important;
   font-size: 10px;
+  /*max-width: 20px !important;*/
+}
+.newOrder-tab-config.active:hover{
+  color: white !important;
   /*max-width: 20px !important;*/
 }
 .newOrder-tab-config{
@@ -204,7 +275,46 @@ tr.order-book-order {
   font-size: 10px;
   /*max-width: 20px !important;*/
 }
+.newOrder-tab-config:hover{
+  color: black !important;
+}
+/*------*/
 .table-border{
   border-width: 1px;
   border-top-style: solid !important;
+}
+.footer{
+  width: 100vh !important;
+  height: 40vh !important;
+  align-items: stretch !important;
+}
+.order-book{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+}
+.buyTable{
+  border-right-width: 1px !important;
+  border-right-color: #787878 !important;
+  border-right-style: solid !important;
+}
+.sellTable{
+  border-left-width: 1px !important;
+  border-left-color: #787878 !important;
+  border-left-style: solid !important;
+}
+
+.tableReset{
+  /*background-color: inherit !important;*/
+  transition: all 500ms ease-out;
+}
+.tableBuySelected{
+  background-color: limegreen !important;
+  transition: all 500ms ease-in;
+}
+.tableSellSelected{
+  background-color: crimson !important;
+  transition: all 500ms ease-in;
 }

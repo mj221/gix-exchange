@@ -30,8 +30,13 @@ import {
 	buyOrderAmountChanged,
 	buyOrderPriceChanged,
 	sellOrderAmountChanged,
-	sellOrderPriceChanged
+	sellOrderPriceChanged,
+	balancesLoading
 } from '../store/actions'
+
+import {
+	loadBalances
+}from '../store/interactions'
 
 const configMetaMask = async (dispatch) => {
   if(window.ethereum){
@@ -62,6 +67,24 @@ class NewOrder extends Component{
       sellPriceValue: ""
     }
   }
+  async componentDidMount(){
+		const {exchange, dispatch} = this.props
+
+		await exchange.events.Order({}, (error, event) =>{
+			dispatch(balancesLoading())
+			this.loadBlockchainData()
+		}) 
+	}
+	loadBlockchainData(){
+		const interval = setInterval(async () => {
+		
+			clearInterval(interval)
+			const {dispatch, web3, exchange, token, account} = this.props
+			await loadBalances(web3, exchange, token, account, dispatch)
+			return;
+			
+		}, 1000);
+	}
 	showForm = (props) =>{
 		const{
 			exchange,
@@ -85,15 +108,8 @@ class NewOrder extends Component{
 						e.preventDefault()
 						if (buyOrder !== null){
 							await makeBuyOrder(exchange, token, web3, buyOrder, account, dispatch)
-							buyOrderAmountChanged(0)
-							buyOrderPriceChanged(0)
-							sellOrderAmountChanged(0)
-							sellOrderPriceChanged(0)
-							this.setState({ buyAmountValue: ""});
-							this.setState({ buyPriceValue: ""});
-							this.setState({ sellAmountValue: ""});
-							this.setState({ sellPriceValue: ""});
-							// document.getElementById("buyForm").reset();
+							dispatch(buyOrderAmountChanged(this.state.buyAmountValue))
+							dispatch(buyOrderPriceChanged(this.state.buyPriceValue))
 						}
 					}}>
 						<div className="form-group small mb-2 mt-1">
@@ -167,7 +183,8 @@ class NewOrder extends Component{
 						e.preventDefault()
 						if (sellOrder !== null){
 							await makeSellOrder(exchange, token, web3, sellOrder, account, dispatch)
-							document.getElementById("sellForm").reset();
+							dispatch(sellOrderAmountChanged(this.state.sellAmountValue))
+							dispatch(sellOrderPriceChanged(this.state.sellPriceValue))
 						}
 					}}>
 						<div className="form-group small mb-2 mt-1">

@@ -106,6 +106,7 @@ class App extends Component {
           ? <Content/>
           : <div style={{height: '100vh', backgroundColor: '#1d1d1d', color: 'white'}}><Loader type="Initialiser"/></div>
         }
+        {/*<Footer/>*/}
       </div>
     );
   }

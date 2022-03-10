@@ -26,7 +26,7 @@ class Trades extends Component {
 
         <div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
           
-          <span>Trades</span>
+          <span>Market Trades</span>
           {this.props.filledOrdersLoaded
             ?<span></span>
             :<Loader type="header"/>
@@ -38,10 +38,10 @@ class Trades extends Component {
 
           <table className="table table-dark table-sm small table-hover">
             <thead> 
-              <tr>
+              <tr className="text-muted" style={{fontSize: '10px'}}>
                 <th> Time</th>
-                <th> POI </th>
-                <th> POI/ETH </th>
+                <th> Size (POI) </th>
+                <th> Price (POI/ETH) </th>
               </tr>
             </thead>
               {this.props.filledOrders
