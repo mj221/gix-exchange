@@ -16,7 +16,7 @@ export const addressIsEqual = (address, account) =>{
 	return web3.utils.toChecksumAddress(address) === web3.utils.toChecksumAddress(account)
 }
 export const formatBalance = balance =>{
-	const precision = 100
+	const precision = 10 ** 5
 	balance = ether(balance)
 	balance = Math.round(balance * precision) / precision //2 decimal places
 	return balance

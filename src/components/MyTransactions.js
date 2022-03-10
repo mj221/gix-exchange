@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import {connect} from 'react-redux'
 
 import {Tabs, Tab} from 'react-bootstrap'
-// import Loader from './Loader'
+import Loader from './Loader'
 
 import './App.css';
 // import "bootstrap/dist/css/bootstrap.min.css";
@@ -31,6 +31,7 @@ const showMyFilledOrders = (myfilledOrders) =>{
             <td className= "text-muted">{order.formattedTimeStamp}</td>
             <td className={`text-${order.orderTypeClass}`}>{order.orderSignClass}{order.tokenAmount}</td>
             <td className={`text-${order.orderTypeClass}`}>{order.tokenPrice}</td>
+            <td>{Math.round(order.tokenAmount * order.tokenPrice * (10**5)) / (10**5)}</td>
           </tr>
         )
       })}
@@ -84,6 +85,7 @@ const showMyAllOrders = (myallOrders) =>{
             <td className={`text-${order.orderTypeClass}`}>{order.orderType}</td>
             <td>{order.tokenAmount}</td>
             <td>{order.tokenPrice}</td>
+            <td>{Math.round(order.tokenAmount * order.tokenPrice * (10**5)) / (10**5)}</td>
             <td>{order.orderStatus}</td>
           </tr>
 				)
@@ -98,13 +100,13 @@ class MyTransactions extends Component{
 		return (
 			<div className="card bg-dark text-white">
 				
-				{/*<div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
+				<div className="card-header d-flex align-items-center" style={{justifyContent: 'space-between'}}>
 					<span>My Transactions</span>
           {this.props.myFilledOrdersLoaded && this.props.myOpenOrdersLoaded && !this.props.orderCancelling
             ?<span></span>
             :<Loader type="header"/>
           }
-				</div>*/}
+				</div>
 
 				<div className="card-body">
 					<Tabs fill justify defaultActiveKey="open-orders" className="bg-dark text-white">
@@ -113,7 +115,7 @@ class MyTransactions extends Component{
 								<thead>
 									<tr className="text-muted" >
 										<th>Time</th>
-										<th>Filled Size/Order Size (POI)</th>
+										<th>Fill Size/Order Size (POI)</th>
 										<th>Price (POI/ETH)</th>
 										<th></th>
 									</tr>
@@ -132,6 +134,7 @@ class MyTransactions extends Component{
 										<th>Side</th>
 										<th>Filled Size/Order Size (POI)</th>
 										<th>Price (POI/ETH)</th>
+										<th>Filled Value/Order Value (ETH)</th>
 										<th>Status</th>
 									</tr>
 								</thead>
@@ -146,8 +149,9 @@ class MyTransactions extends Component{
 								<thead>
 									<tr className="text-muted">
 										<th>Time</th>
-										<th>Filled Size/Order Size (POI)</th>
+										<th>Size (POI)</th>
 										<th>Price (POI/ETH)</th>
+										<th>Value (ETH)</th>
 									</tr>
 								</thead>
 								{this.props.myFilledOrdersLoaded
