@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/gix-exchange/static/css/main.509a4151.chunk.css",
+    "main.js": "/gix-exchange/static/js/main.f1aad52c.chunk.js",
+    "main.js.map": "/gix-exchange/static/js/main.f1aad52c.chunk.js.map",
+    "runtime-main.js": "/gix-exchange/static/js/runtime-main.0b2e6ab3.js",
+    "runtime-main.js.map": "/gix-exchange/static/js/runtime-main.0b2e6ab3.js.map",
+    "static/css/2.a7a4ff3a.chunk.css": "/gix-exchange/static/css/2.a7a4ff3a.chunk.css",
+    "static/js/2.88b373de.chunk.js": "/gix-exchange/static/js/2.88b373de.chunk.js",
+    "static/js/2.88b373de.chunk.js.map": "/gix-exchange/static/js/2.88b373de.chunk.js.map",
+    "index.html": "/gix-exchange/index.html",
+    "precache-manifest.00201a56529bd3ba164a69ebb444475b.js": "/gix-exchange/precache-manifest.00201a56529bd3ba164a69ebb444475b.js",
+    "service-worker.js": "/gix-exchange/service-worker.js",
+    "static/css/2.a7a4ff3a.chunk.css.map": "/gix-exchange/static/css/2.a7a4ff3a.chunk.css.map",
+    "static/css/main.509a4151.chunk.css.map": "/gix-exchange/static/css/main.509a4151.chunk.css.map",
+    "static/js/2.88b373de.chunk.js.LICENSE.txt": "/gix-exchange/static/js/2.88b373de.chunk.js.LICENSE.txt",
+    "static/media/gix-logo2.png": "/gix-exchange/static/media/gix-logo2.bb3c3fdc.png",
+    "static/media/poi-logo.png": "/gix-exchange/static/media/poi-logo.4edcc8c6.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0b2e6ab3.js",
+    "static/css/2.a7a4ff3a.chunk.css",
+    "static/js/2.88b373de.chunk.js",
+    "static/css/main.509a4151.chunk.css",
+    "static/js/main.f1aad52c.chunk.js"
+  ]
+}
