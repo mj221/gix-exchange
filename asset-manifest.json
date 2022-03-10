@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/gix-exchange/static/css/main.509a4151.chunk.css",
-    "main.js": "/gix-exchange/static/js/main.489b3031.chunk.js",
-    "main.js.map": "/gix-exchange/static/js/main.489b3031.chunk.js.map",
+    "main.css": "/gix-exchange/static/css/main.7432adbb.chunk.css",
+    "main.js": "/gix-exchange/static/js/main.4e4cb426.chunk.js",
+    "main.js.map": "/gix-exchange/static/js/main.4e4cb426.chunk.js.map",
     "runtime-main.js": "/gix-exchange/static/js/runtime-main.0b2e6ab3.js",
     "runtime-main.js.map": "/gix-exchange/static/js/runtime-main.0b2e6ab3.js.map",
-    "static/css/2.a7a4ff3a.chunk.css": "/gix-exchange/static/css/2.a7a4ff3a.chunk.css",
-    "static/js/2.88b373de.chunk.js": "/gix-exchange/static/js/2.88b373de.chunk.js",
-    "static/js/2.88b373de.chunk.js.map": "/gix-exchange/static/js/2.88b373de.chunk.js.map",
+    "static/css/2.76a35a5c.chunk.css": "/gix-exchange/static/css/2.76a35a5c.chunk.css",
+    "static/js/2.8946ceff.chunk.js": "/gix-exchange/static/js/2.8946ceff.chunk.js",
+    "static/js/2.8946ceff.chunk.js.map": "/gix-exchange/static/js/2.8946ceff.chunk.js.map",
     "index.html": "/gix-exchange/index.html",
-    "precache-manifest.b8d5f18f87b27c8c8d595efbb39e0e94.js": "/gix-exchange/precache-manifest.b8d5f18f87b27c8c8d595efbb39e0e94.js",
+    "precache-manifest.8e7ae8462a5e049db6e76cabefd0cab1.js": "/gix-exchange/precache-manifest.8e7ae8462a5e049db6e76cabefd0cab1.js",
     "service-worker.js": "/gix-exchange/service-worker.js",
-    "static/css/2.a7a4ff3a.chunk.css.map": "/gix-exchange/static/css/2.a7a4ff3a.chunk.css.map",
-    "static/css/main.509a4151.chunk.css.map": "/gix-exchange/static/css/main.509a4151.chunk.css.map",
-    "static/js/2.88b373de.chunk.js.LICENSE.txt": "/gix-exchange/static/js/2.88b373de.chunk.js.LICENSE.txt",
+    "static/css/2.76a35a5c.chunk.css.map": "/gix-exchange/static/css/2.76a35a5c.chunk.css.map",
+    "static/css/main.7432adbb.chunk.css.map": "/gix-exchange/static/css/main.7432adbb.chunk.css.map",
+    "static/js/2.8946ceff.chunk.js.LICENSE.txt": "/gix-exchange/static/js/2.8946ceff.chunk.js.LICENSE.txt",
     "static/media/gix-logo2.png": "/gix-exchange/static/media/gix-logo2.bb3c3fdc.png",
     "static/media/poi-logo.png": "/gix-exchange/static/media/poi-logo.4edcc8c6.png"
   },
   "entrypoints": [
     "static/js/runtime-main.0b2e6ab3.js",
-    "static/css/2.a7a4ff3a.chunk.css",
-    "static/js/2.88b373de.chunk.js",
-    "static/css/main.509a4151.chunk.css",
-    "static/js/main.489b3031.chunk.js"
+    "static/css/2.76a35a5c.chunk.css",
+    "static/js/2.8946ceff.chunk.js",
+    "static/css/main.7432adbb.chunk.css",
+    "static/js/main.4e4cb426.chunk.js"
   ]
 }
