@@ -23,24 +23,24 @@
 
 <hr style="border:2px solid gray"> </hr>
 <p>
-Access here with a Ethereum compatible browser (MetaMask) at Kovan testnet:
+GiX is live on https://mj221.github.io/gix-exchange/. Requires a Ethereum compatible browser (MetaMask) at Kovan testnet.
 
-```
-https://mj221.github.io/gix-exchange/
-```
 </p>
 
 <p>
-Contract addresses available at KOVAN etherscan:
+<h3>Contract addresses available at KOVAN etherscan:</h3>
 
+Exchange Contract Address:
 ```
-Exchange Contract Address: https://kovan.etherscan.io/address/0x2845ee6026a8181D3372Ec547Cdc4E62daC7e840
+https://kovan.etherscan.io/address/0x2845ee6026a8181D3372Ec547Cdc4E62daC7e840
 ```
+<br/>POI Token Contract Address: 
 ```
-POI Token Contract Address: https://kovan.etherscan.io/address/0x448cbbe15Bc00E5Cf19F22643cA673434fDF8035
+https://kovan.etherscan.io/address/0x448cbbe15Bc00E5Cf19F22643cA673434fDF8035
 ```
 </p>
 
+<hr/>
 
 ## Road Map
 #### `Implement a robust auto buy/sell algorithm[]`
