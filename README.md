@@ -42,6 +42,12 @@ https://mj221.github.io/gix-exchange/
 #### `Add more token support[]`
 #### `Add native GiX token for additional benefits such as fee reduction in tiers[]`
 
+<hr/>
+<p align="center">
+ <i>GiX is released under MIT license. You are free to use, modify and distribute this software, as long as the copyright header is left intact. 
+ </i>
+</p>
+
 <!-- ### `npm start`
 
 Runs the app in the development mode.\
