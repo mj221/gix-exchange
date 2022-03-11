@@ -152,20 +152,35 @@ class OrderBook extends Component {
           {/*{console.log("Loaded:", this.props.orderBookLoaded)}
           {console.log("SHOW:", this.props.showOrderBook)}*/}
         </div>
-
-        <div className="card-body order-book">
-          <table className="table table-dark table-sm small table-hover">
-            {this.props.orderBookLoaded
-              ?this.showOrderBook(this.props)
-              :<tbody><tr><th></th></tr></tbody>
-            }
-          </table>
-          <table className="table table-dark table-sm small table-hover">
-            {this.props.orderBookLoaded
-              ?this.showOrderBook2(this.props)
-              :<tbody><tr><th></th></tr></tbody>
-            }
-          </table>
+        <div className="card-body d-flex">
+          <div className="card-body2 order-book">
+            <table className="table table-dark table-sm small table-hover">
+              {this.props.orderBookLoaded
+                ?this.showOrderBook(this.props)
+                :<tbody><tr><th></th></tr></tbody>
+              }
+            </table>
+            {/*<table className="table table-dark table-sm small table-hover">
+              {this.props.orderBookLoaded
+                ?this.showOrderBook2(this.props)
+                :<tbody><tr><th></th></tr></tbody>
+              }
+            </table>*/}
+          </div>
+          <div className="card-body2 order-book">
+            {/*<table className="table table-dark table-sm small table-hover">
+              {this.props.orderBookLoaded
+                ?this.showOrderBook(this.props)
+                :<tbody><tr><th></th></tr></tbody>
+              }
+            </table>*/}
+            <table className="table table-dark table-sm small table-hover">
+              {this.props.orderBookLoaded
+                ?this.showOrderBook2(this.props)
+                :<tbody><tr><th></th></tr></tbody>
+              }
+            </table>
+          </div>
         </div>
       </div>
     );
