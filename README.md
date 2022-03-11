@@ -23,7 +23,7 @@
 
 <hr style="border:2px solid gray"> </hr>
 <p>
-Access here with a Ethereum compatible browser (MetaMask) at Goerli testnet:
+Access here with a Ethereum compatible browser (MetaMask) at Kovan testnet:
 
 ```
 https://mj221.github.io/gix-exchange/
