@@ -43,9 +43,9 @@ https://kovan.etherscan.io/address/0x448cbbe15Bc00E5Cf19F22643cA673434fDF8035
 <hr/>
 
 ## Road Map
-#### `Implement a robust auto buy/sell algorithm[]`
-#### `Add more token support[]`
-#### `Add native GiX token for additional benefits such as fee reduction in tiers[]`
+#### `Implement a robust auto buy/sell algorithm []`
+#### `Add more token support []`
+#### `Introduce tradiing fee tiers with native GiX token []`
 
 <hr/>
 <p align="center">
