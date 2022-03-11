@@ -60,9 +60,9 @@ class OrderBook extends Component {
           }}
           
         >
-          <td className={`${this.state.selectedRow === order.id ? "tableBuySelected" : "tableReset"}`}>{order.tokenAmount}</td>
-          <td className={`text-${order.orderTypeClass} ${this.state.selectedRow===order.id?"tableBuySelected":"tableReset"}`}>{Math.round(order.tokenPrice * (10**5)) / 10**5}</td>
-          <td className={`${this.state.selectedRow === order.id ? "tableBuySelected" : "tableReset"}`}>{Math.round(order.etherAmount * (10**5))/10**5}</td>
+          <td style = {{textAlign: 'center'}} className={`${this.state.selectedRow === order.id ? "tableBuySelected" : "tableReset"}`}>{order.tokenAmount}</td>
+          <td style = {{textAlign: 'center'}} className={`text-${order.orderTypeClass} ${this.state.selectedRow===order.id?"tableBuySelected":"tableReset"}`}>{Math.round(order.tokenPrice * (10**5)) / 10**5}</td>
+          <td style = {{textAlign: 'center', borderRightStyle: 'solid', borderRightWidth: '1px'}} className={`${this.state.selectedRow === order.id ? "tableBuySelected" : "tableReset"}`}>{Math.round(order.etherAmount * (10**5))/10**5}</td>
         </tr>
       </OverlayTrigger>
     )
@@ -91,9 +91,9 @@ class OrderBook extends Component {
             this.renderTableAnimation("")
           }}
         >
-          <td className={`${this.state.selectedRow === order.id ? "tableSellSelected" : "tableReset"}`}>{Math.round(order.etherAmount * (10**5))/10**5}</td>
-          <td className={`text-${order.orderTypeClass} ${this.state.selectedRow===order.id?"tableSellSelected":"tableReset"}`}>{Math.round(order.tokenPrice * (10**5)) / 10**5}</td>
-          <td className={`${this.state.selectedRow === order.id ? "tableSellSelected" : "tableReset"}`}>{order.tokenAmount}</td>
+          <td style = {{textAlign: 'center', borderLeftStyle: 'solid', borderLeftWidth: '1px'}} className={`${this.state.selectedRow === order.id ? "tableSellSelected" : "tableReset"}`}>{Math.round(order.etherAmount * (10**5))/10**5}</td>
+          <td style = {{textAlign: 'center'}} className={`text-${order.orderTypeClass} ${this.state.selectedRow===order.id?"tableSellSelected":"tableReset"}`}>{Math.round(order.tokenPrice * (10**5)) / 10**5}</td>
+          <td style = {{textAlign: 'center'}} className={`${this.state.selectedRow === order.id ? "tableSellSelected" : "tableReset"}`}>{order.tokenAmount}</td>
         </tr>
       </OverlayTrigger>
     )
@@ -104,10 +104,15 @@ class OrderBook extends Component {
     const {orderBook} = props 
     return (
       <tbody>
-        <tr className="text-muted" style={{fontSize: '10px'}}>
-          <th>Bid Size (POI)</th>
-          <th>Bid Price (POI/ETH)</th>
-          <th>ETH</th>
+        <tr className="text-muted trBorderBuy" style={{fontSize: '11px', textAlign: 'center'}}>
+          <th>Bid&nbsp;Size</th>
+          <th>Bid Price</th>
+          <th>Value</th>
+        </tr>
+        <tr className="text-muted" style={{fontSize: '10px', textAlign: 'center'}}>
+          <th>(POI)</th>
+          <th>(POI/ETH)</th>
+          <th>(ETH)</th>
         </tr>
         {orderBook.buyOrders.map((order) => this.renderOrder(order, props))}
       </tbody>
@@ -118,10 +123,15 @@ class OrderBook extends Component {
     const {orderBook} = props 
     return (
       <tbody>
-        <tr className="text-muted" style={{fontSize: '10px'}}>
-          <th>ETH</th>
-          <th>Ask Price (POI/ETH)</th>
-          <th>Ask Size (POI)</th>
+        <tr className="text-muted trBorderSell" style={{fontSize: '11px', textAlign: 'center'}}>
+          <th>Value</th>
+          <th>Ask Price</th>
+          <th>Ask&nbsp;Size</th>
+        </tr>
+        <tr className="text-muted" style={{fontSize: '10px', textAlign: 'center'}}>
+          <th>(ETH)</th>
+          <th>(POI/ETH)</th>
+          <th>(POI)</th>
         </tr>
         {orderBook.sellOrders.map((order) => this.renderOrder2(order, props))}
       </tbody>
@@ -144,13 +154,13 @@ class OrderBook extends Component {
         </div>
 
         <div className="card-body order-book">
-          <table className="table table-dark table-sm small table-hover buyTable">
+          <table className="table table-dark table-sm small table-hover">
             {this.props.orderBookLoaded
               ?this.showOrderBook(this.props)
               :<tbody><tr><th></th></tr></tbody>
             }
           </table>
-          <table className="table table-dark table-sm small table-hover sellTable">
+          <table className="table table-dark table-sm small table-hover">
             {this.props.orderBookLoaded
               ?this.showOrderBook2(this.props)
               :<tbody><tr><th></th></tr></tbody>
