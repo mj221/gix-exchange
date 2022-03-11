@@ -7,15 +7,6 @@
 
 <b>GiX</b> is a decentralised exchange built with Ethereum Smart contracts and ReactJS for ERC-20 token (POI token) trading. Integrated with open order books and price charts for familiar trading engagement and experience with traditional traders. The GiX contract uses Openzeppelin proxies to allow upgradeablility over time. Currently runs on the KOVAN Ethereum test network and has a trading fee of 1%.
 
-```
-Exchange Contract Address: https://kovan.etherscan.io/address/0x2845ee6026a8181D3372Ec547Cdc4E62daC7e840
-```
-```
-POI Token Contract Address: https://kovan.etherscan.io/address/0x448cbbe15Bc00E5Cf19F22643cA673434fDF8035
-```
-
-
-
 <h2 align="center"> Powered by GiX. </h2>
 <p align="center">
   <img width="75%" src="https://user-images.githubusercontent.com/50122869/157804221-dbeab79b-2701-488c-8121-5becbb563f7c.png">
@@ -38,6 +29,18 @@ Access here with a Ethereum compatible browser (MetaMask) at Goerli testnet:
 https://mj221.github.io/gix-exchange/
 ```
 </p>
+
+<p>
+Contract addresses available at KOVAN etherscan:
+
+```
+Exchange Contract Address: https://kovan.etherscan.io/address/0x2845ee6026a8181D3372Ec547Cdc4E62daC7e840
+```
+```
+POI Token Contract Address: https://kovan.etherscan.io/address/0x448cbbe15Bc00E5Cf19F22643cA673434fDF8035
+```
+</p>
+
 
 ## Road Map
 #### `Implement a robust auto buy/sell algorithm[]`
