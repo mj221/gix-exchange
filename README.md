@@ -1,33 +1,47 @@
-# GiX | Exchange
-
-This project is a WIP decentralised exchange built with Ethereum Smart contracts and ReactJS for ERC-20 token trading. Integrated with open order books and price charts for familiar trading engagement and experience with traditional traders. 
+<h1 align="center"> GiX | Exchange </h1>
 
 <p align="center">
   <img height="150" src="https://user-images.githubusercontent.com/50122869/156268981-f9a2ab72-ad67-4325-817b-aac32e398726.png">
   <img height="150" src="https://user-images.githubusercontent.com/50122869/156274411-95f35b06-288e-4c10-a4da-28cf4936a8fe.png">
 </p>
 
-## Powered by GiX.
+<b>GiX</b> is a decentralised exchange built with Ethereum Smart contracts and ReactJS for ERC-20 token (POI token) trading. Integrated with open order books and price charts for familiar trading engagement and experience with traditional traders. The GiX contract uses Openzeppelin proxies to allow upgradeablility over time. Currently runs on the KOVAN Ethereum test network and has a trading fee of 1%.
+
+```
+Exchange Contract Address: https://kovan.etherscan.io/address/0x2845ee6026a8181D3372Ec547Cdc4E62daC7e840
+```
+```
+POI Token Contract Address: https://kovan.etherscan.io/address/0x448cbbe15Bc00E5Cf19F22643cA673434fDF8035
+```
+
+
+
+<h2 align="center"> Powered by GiX. </h2>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/50122869/156274365-324e3b8e-ceeb-4e13-9482-761bf4755440.png">
+  <img width="50%" src="https://user-images.githubusercontent.com/50122869/157804221-dbeab79b-2701-488c-8121-5becbb563f7c.png">
+</p>
+<hr/>
+<h2 align="center">
+   Animated Preview
+</h2>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/50122869/157802768-7a594bed-db6b-43ef-a340-e06bec8619b6.gif">
+</p>
+
+<hr style="border:2px solid gray"> </hr>
+<p>
+Access here with a Ethereum compatible browser (MetaMask) at Goerli testnet:
+
+```
+https://mj221.github.io/gix-exchange/
+```
 </p>
 
 ## Road Map
+#### `Implement a robust auto buy/sell algorithm[]`
+#### `Add more token support[]`
+#### `Add native GiX token for additional benefits such as fee reduction in tiers[]`
 
-#### `Add exchange smart contracts [X]`
-#### `Conduct smart contract tests [X]`
-#### `Add interactable navbar [X]`
-#### `Added redux JS backend [X]`
-#### `Frontend: trades [X]`
-#### `Frontend: open orders [X]`
-#### `Frontend: user transactions [X]`
-#### `Frontend: Add readable price chart []`
-#### `Frontend: Add readable user balance []`
-#### `Frontend: Add buy and sell order []`
-#### `Improve UI/UX []`
-#### `Add more tokens []`
-
-<hr>
 <!-- ### `npm start`
 
 Runs the app in the development mode.\
