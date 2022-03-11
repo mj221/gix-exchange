@@ -18,7 +18,7 @@ POI Token Contract Address: https://kovan.etherscan.io/address/0x448cbbe15Bc00E5
 
 <h2 align="center"> Powered by GiX. </h2>
 <p align="center">
-  <img width="50%" src="https://user-images.githubusercontent.com/50122869/157804221-dbeab79b-2701-488c-8121-5becbb563f7c.png">
+  <img width="75%" src="https://user-images.githubusercontent.com/50122869/157804221-dbeab79b-2701-488c-8121-5becbb563f7c.png">
 </p>
 <hr/>
 <h2 align="center">
