@@ -31,13 +31,13 @@
 /*orderbook, market trades*/
 .content > div:nth-child(2) {
   width: 27.5%;
-  min-width: 200px;
+  min-width: 300px;
 }
 /*deposit-withdrawal, buy/sell*/
 .content > div:last-child {
   width: 27.5%;
   padding-right: 0px;
-  min-width: 200px;
+  min-width: 300px;
 }
 @media (max-width:992px) {
   .content-all{
@@ -306,4 +306,12 @@ tr.order-book-order {
 .tableSellSelected{
   background-color: crimson !important;
   transition: all 500ms ease-in;
+}
+.trBorderBuy{
+  border-bottom: transparent !important;
+  border-right: transparent !important;
+}
+.trBorderSell{
+  border-bottom: transparent !important;
+  border-left: transparent !important;
 }
