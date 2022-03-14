@@ -17,7 +17,7 @@ export const addressIsEqual = (address, account) =>{
 }
 export const formatBalance = balance =>{
 	const precision = 10 ** 5
-	balance = ether(balance)
+	balance = ether(balance.toString())
 	balance = Math.round(balance * precision) / precision //2 decimal places
 	return balance
 }
