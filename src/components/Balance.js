@@ -62,17 +62,26 @@ class Balance extends Component{
 	constructor(props) {
     super(props)
     this.state = {
-      ethDepositAmount: "",
-      ethWithdrawAmount: "",
-      tokenDepositAmount: "",
-      tokenWithdrawAmount: ""
+      ethDepositAmount: 0,
+      ethWithdrawAmount: 0,
+      tokenDepositAmount: 0,
+      tokenWithdrawAmount: 0
     }
   }
 	async componentDidMount(){
 		const {exchange, dispatch} = this.props
  		this.loadBlockchainData()
 		window.ethereum.on('accountsChanged', (accounts) => {
-      // console.log("Account changed: ", accounts) 
+      if (accounts[0] == null){
+        this.setState({ethDepositAmount: 0})
+        this.setState({ethWithdrawAmount: 0})
+        this.setState({tokenDepositAmount: 0})
+        this.setState({tokenWithdrawAmount: 0})
+        dispatch(ethDepositAmountChanged(this.state.ethDepositAmount))
+        dispatch(ethWithdrawAmountChanged(this.state.ethWithdrawAmount))
+        dispatch(tokenDepositAmountChanged(this.state.tokenDepositAmount))
+        dispatch(tokenWithdrawAmountChanged(this.state.tokenWithdrawAmount))
+      }
   		dispatch(balancesLoading())
       this.loadBlockchainData()
       
@@ -96,11 +105,11 @@ class Balance extends Component{
 	loadBlockchainData(){
 		const interval = setInterval(async () => {
 			const {dispatch, web3, exchange, token, account} = this.props
-			if(account !== ''){
+			
 				clearInterval(interval)
 				await loadBalances(web3, exchange, token, account, dispatch)
 				return;
-			}
+
 		}, 1000);
 	}
 
@@ -340,7 +349,7 @@ class Balance extends Component{
 					<span>Balance</span>
           {!this.props.balancesLoading
             ?<span></span>
-            :<Loader type="header"/>
+            :<div>{this.props.account !== ""?<Loader type="header"/>:<div></div>}</div>
           }
 				</div>
 				<div className="card-body">
