@@ -200,7 +200,10 @@ export const makeBuyOrder = async (exchange, token, web3, order, account, dispat
 		const tokenGet = token.options.address
 		const amountGet = web3.utils.toWei(order.amount.toString(), 'ether')
 		const tokenGive = ETHER_ADDRESS
-		const amountGive = web3.utils.toWei((order.amount * order.price).toString(), 'ether')
+
+		const precision = 10**18
+		const ordering = Math.round(order.amount * order.price * precision)/ precision
+		const amountGive = web3.utils.toWei(ordering.toString(), 'ether')
 
 		await exchange.methods.makeOrder(tokenGet, amountGet, tokenGive, amountGive)
 								.send({from: account})
@@ -216,7 +219,11 @@ export const makeBuyOrder = async (exchange, token, web3, order, account, dispat
 export const makeSellOrder = async (exchange, token, web3, order, account, dispatch) => {
 	if (account !== '' && order !== null){
 		const tokenGet = ETHER_ADDRESS
-		const amountGet = web3.utils.toWei((order.amount * order.price).toString(), 'ether')
+
+		const precision = 10**18
+		const ordering = Math.round(order.amount * order.price * precision)/ precision
+		const amountGet = web3.utils.toWei(ordering.toString(), 'ether')
+
 		const tokenGive = token.options.address
 		const amountGive = web3.utils.toWei(order.amount.toString(), 'ether')
 
