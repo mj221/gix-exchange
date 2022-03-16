@@ -62,10 +62,10 @@ class Balance extends Component{
 	constructor(props) {
     super(props)
     this.state = {
-      ethDepositAmount: 0,
-      ethWithdrawAmount: 0,
-      tokenDepositAmount: 0,
-      tokenWithdrawAmount: 0
+      ethDepositAmount: '',
+      ethWithdrawAmount: '',
+      tokenDepositAmount: '',
+      tokenWithdrawAmount: ''
     }
   }
 	async componentDidMount(){
@@ -73,10 +73,10 @@ class Balance extends Component{
  		this.loadBlockchainData()
 		window.ethereum.on('accountsChanged', (accounts) => {
       if (accounts[0] == null){
-        this.setState({ethDepositAmount: 0})
-        this.setState({ethWithdrawAmount: 0})
-        this.setState({tokenDepositAmount: 0})
-        this.setState({tokenWithdrawAmount: 0})
+        this.setState({ethDepositAmount: ''})
+        this.setState({ethWithdrawAmount: ''})
+        this.setState({tokenDepositAmount: ''})
+        this.setState({tokenWithdrawAmount: ''})
         dispatch(ethDepositAmountChanged(this.state.ethDepositAmount))
         dispatch(ethWithdrawAmountChanged(this.state.ethWithdrawAmount))
         dispatch(tokenDepositAmountChanged(this.state.tokenDepositAmount))
