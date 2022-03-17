@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d9f841d9e2f9c3d40c48388b6e1ce3c0",
+    "revision": "0414a5c4f2c41f5593256f97f7bbe3ab",
     "url": "/gix-exchange/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/gix-exchange/static/css/2.76a35a5c.chunk.css"
   },
   {
-    "revision": "420143f2a18c6e4ec074",
+    "revision": "f6a8f9942b2502af5dc1",
     "url": "/gix-exchange/static/css/main.a258e12b.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/gix-exchange/static/js/2.2c3b8ab5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "420143f2a18c6e4ec074",
-    "url": "/gix-exchange/static/js/main.156f37e4.chunk.js"
+    "revision": "f6a8f9942b2502af5dc1",
+    "url": "/gix-exchange/static/js/main.3e10b817.chunk.js"
   },
   {
     "revision": "f09986b79efd4f65a62e",

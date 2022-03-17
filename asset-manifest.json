@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/gix-exchange/static/css/main.a258e12b.chunk.css",
-    "main.js": "/gix-exchange/static/js/main.156f37e4.chunk.js",
-    "main.js.map": "/gix-exchange/static/js/main.156f37e4.chunk.js.map",
+    "main.js": "/gix-exchange/static/js/main.3e10b817.chunk.js",
+    "main.js.map": "/gix-exchange/static/js/main.3e10b817.chunk.js.map",
     "runtime-main.js": "/gix-exchange/static/js/runtime-main.0b2e6ab3.js",
     "runtime-main.js.map": "/gix-exchange/static/js/runtime-main.0b2e6ab3.js.map",
     "static/css/2.76a35a5c.chunk.css": "/gix-exchange/static/css/2.76a35a5c.chunk.css",
     "static/js/2.2c3b8ab5.chunk.js": "/gix-exchange/static/js/2.2c3b8ab5.chunk.js",
     "static/js/2.2c3b8ab5.chunk.js.map": "/gix-exchange/static/js/2.2c3b8ab5.chunk.js.map",
     "index.html": "/gix-exchange/index.html",
-    "precache-manifest.80376b79d6b0a6a94440c2ef7cfcfc2b.js": "/gix-exchange/precache-manifest.80376b79d6b0a6a94440c2ef7cfcfc2b.js",
+    "precache-manifest.9f9f71e31bc8f214a0b1e46132a8803b.js": "/gix-exchange/precache-manifest.9f9f71e31bc8f214a0b1e46132a8803b.js",
     "service-worker.js": "/gix-exchange/service-worker.js",
     "static/css/2.76a35a5c.chunk.css.map": "/gix-exchange/static/css/2.76a35a5c.chunk.css.map",
     "static/css/main.a258e12b.chunk.css.map": "/gix-exchange/static/css/main.a258e12b.chunk.css.map",
@@ -22,6 +22,6 @@
     "static/css/2.76a35a5c.chunk.css",
     "static/js/2.2c3b8ab5.chunk.js",
     "static/css/main.a258e12b.chunk.css",
-    "static/js/main.156f37e4.chunk.js"
+    "static/js/main.3e10b817.chunk.js"
   ]
 }
