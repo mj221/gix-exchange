@@ -20,7 +20,7 @@ export default function App() {
             </a>
 
 
-            <a className='btn btn-outline-light btn-floating m-1' href='https://www.linkedin.com/in/mj-minjae-lee-23695918b/' target="_blank" role='button' rel="noopener noreferrer">
+            <a className='btn btn-outline-light btn-floating m-1' href='https://www.linkedin.com/in/minjae-mj-lee-23695918b/' target="_blank" role='button' rel="noopener noreferrer">
               <MDBIcon fab icon='linkedin-in' />
             </a>
 
