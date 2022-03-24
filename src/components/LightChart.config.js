@@ -1,6 +1,7 @@
 export const lightChartOptions = {
 	layout: {
         backgroundColor: '#1d1d1d',
+        backgroundColor: '#1d1d1d',
         textColor: 'rgba(255, 255, 255, 0.9)',
   },
 	grid: {
@@ -10,7 +11,10 @@ export const lightChartOptions = {
         horzLines: {
           color: '#334158',
         },
-    },
+  },
+  crosshair:{
+  	mode: 0
+  },
 	priceScale: {
         position: 'right',
         autoScale: false,
@@ -25,7 +29,7 @@ export const lightChartOptions = {
 	timeScale: {
 		borderColor: '#485c7b',
 		rightOffset: 6,
-		// barSpacing: 3,
+		barSpacing: 3,
 		// fixLeftEdge: true,
 		lockVisibleTimeRangeOnResize: true,
 		rightBarStaysOnScroll: true,
