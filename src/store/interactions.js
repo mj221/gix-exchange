@@ -196,7 +196,8 @@ export const withdrawToken = async(exchange, web3, tokenWithdrawAmount, account,
 }
 
 export const makeBuyOrder = async (exchange, token, web3, order, account, dispatch) => {
-	if (account !== '' && order !== null){
+	try{
+		if (account !== '' && order !== null){
 		const tokenGet = token.options.address
 		const amountGet = web3.utils.toWei(order.amount.toString(), 'ether')
 		const tokenGive = ETHER_ADDRESS
@@ -213,11 +214,16 @@ export const makeBuyOrder = async (exchange, token, web3, order, account, dispat
 									console.log(error)
 									// window.alert("Could not make buy order. Try again.")
 								})
+		}
+	}catch(err){
+		console.log(err)
 	}
+	
 	
 }
 export const makeSellOrder = async (exchange, token, web3, order, account, dispatch) => {
-	if (account !== '' && order !== null){
+	try{
+		if (account !== '' && order !== null){
 		const tokenGet = ETHER_ADDRESS
 
 		const precision = 10**18
@@ -235,9 +241,11 @@ export const makeSellOrder = async (exchange, token, web3, order, account, dispa
 									console.log(error)
 									// window.alert("Could not make sell order. Try again.")
 								})
+		}
+	}catch(err){
+		console.log(err)
 	}
 	
-
 }
 
 // smart contract event listener
