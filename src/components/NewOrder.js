@@ -23,7 +23,8 @@ import {
 	buyOrderPriceSelector,
 	buyOrderAmountSelector,
 	sellOrderAmountSelector,
-	sellOrderPriceSelector
+	sellOrderPriceSelector,
+	priceChartSelector
 } from '../store/selectors'
 
 import {
@@ -134,7 +135,18 @@ class NewOrder extends Component{
 							</div>
 						</div>
 						<div className="form-group small mb-3">
-							<label>Buy Price</label>
+							<div className= "d-flex align-items-center" style={{justifyContent: 'space-between'}}>
+								<label>Buy Price</label>
+								<label className="latestPrice">
+									<small 
+										className="text-muted" 
+										onClick={()=>this.setState({buyPriceValue: this.props.priceChart.lastPrice})}
+									>
+										{this.props.priceChart.lastPrice}
+									</small>
+								</label>
+							</div>
+							
 							<div className="input-group">
 								<input
 									type="text"
@@ -159,7 +171,7 @@ class NewOrder extends Component{
 							<tbody>
 								<tr>
 									<td style={{textAlign:"left"}}>Total</td>
-									<td style={{textAlign:"center"}}>{Math.round(buyOrderAmount * buyOrderPrice * (10**5)) / (10**5)}</td>
+									<td style={{textAlign:"center"}}>{Math.round(this.state.buyAmountValue * this.state.buyPriceValue * (10**6)) / (10**6)}</td>
 									<td style={{textAlign:"right"}}>ETH</td>
 								</tr>
 							</tbody>
@@ -167,6 +179,7 @@ class NewOrder extends Component{
 						<button 
 							onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
 							onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
+							// disabled = {this.props.buyOrderMaking}
 							style={{backgroundColor: '#1d1d1d', color:'white'}} 
 							type="submit" className="btn btn-block btn-sm mb-0"
 							onClick={() => account === '' ? configMetaMask(dispatch) : null}
@@ -209,7 +222,17 @@ class NewOrder extends Component{
 							</div>
 						</div>
 						<div className="form-group small mb-3">
-							<label>Sell Price</label>
+							<div className= "d-flex align-items-center" style={{justifyContent: 'space-between'}}>
+								<label>Sell Price</label>
+								<label className="latestPrice">
+									<small 
+										className="text-muted" 
+										onClick={()=>this.setState({sellPriceValue: this.props.priceChart.lastPrice})}
+									>
+										{this.props.priceChart.lastPrice}
+									</small>
+								</label>
+							</div>
 							<div className="input-group">
 								<input
 									type="text"
@@ -232,7 +255,7 @@ class NewOrder extends Component{
 							<tbody>
 								<tr>
 									<td style={{textAlign:"left"}}>Total</td>
-									<td style={{textAlign:"center"}}>{Math.round(sellOrderAmount * sellOrderPrice * (10**5)) / (10**5)}</td>
+									<td style={{textAlign:"center"}}>{Math.round(this.state.sellAmountValue * this.state.sellPriceValue * (10**6)) / (10**6)}</td>
 									<td style={{textAlign:"right"}}>ETH</td>
 								</tr>
 							</tbody>
@@ -240,6 +263,7 @@ class NewOrder extends Component{
 						<button 
 							onMouseOver={(event)=>{event.target.style.borderColor = 'white'}} 
 							onMouseLeave={(event) => {event.target.style.borderColor= 'transparent'}}
+							// disabled = {this.props.sellOrderMaking}
 							style={{backgroundColor: '#1d1d1d', color:'white'}} 
 							type="submit" className="btn btn-block btn-sm"
 							onClick={() => account === '' ? configMetaMask(dispatch) : null}
@@ -282,7 +306,8 @@ function mapStateToProps(state){
   	buyOrderPrice: buyOrderPriceSelector(state),
   	buyOrderAmount: buyOrderAmountSelector(state),
   	sellOrderPrice: sellOrderPriceSelector(state),
-  	sellOrderAmount: sellOrderAmountSelector(state)
+  	sellOrderAmount: sellOrderAmountSelector(state),
+  	priceChart: priceChartSelector(state)
   }
 }
 export default connect(mapStateToProps)(NewOrder);
