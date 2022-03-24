@@ -81,14 +81,14 @@ class PriceChart extends Component{
   	const overwriteOptions = {
 	    priceFormat: {
 	        type: 'price',
-	        precision: 5,
-	        minMove: 0.00001,
-	    }
+	        precision: 6,
+	        minMove: 0.000001,
+	    },
 		};
 		return (
 			<div className="price-chart">
 				<Chart
-					legend= "POI / ETH, GiX, [1H]"
+					legend= "POI / ETH · 1H · GiX"
 					options={lightChartOptions} 
 					candlestickSeries={priceChart.series} 
 					// candlestickSeries = {this.state.OneHourData}
