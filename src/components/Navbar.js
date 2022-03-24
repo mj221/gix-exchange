@@ -65,7 +65,7 @@ class Navbar extends Component {
                   }
                   <a 
                     className="account-etherscan"
-                    href={`https://etherscan.io/address/${this.props.account}`}
+                    href={`https://kovan.etherscan.io/address/${this.props.account}`}
                     rel="noopener noreferrer"
                     target="_blank"                  
                     >
