@@ -1,7 +1,6 @@
 export const lightChartOptions = {
 	layout: {
         backgroundColor: '#1d1d1d',
-        backgroundColor: '#1d1d1d',
         textColor: 'rgba(255, 255, 255, 0.9)',
   },
 	grid: {
