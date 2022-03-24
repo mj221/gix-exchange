@@ -358,34 +358,90 @@ export const priceChartSelector = createSelector(
 )
 
 // Lightweight chart ver.
-const buildGraphData = orders =>{
+const buildGraphData = (orders) =>{
 	// group by trades made in the same minute or hour depending on startOf()
 	// format('X') formats time in unix timestamp
 	const order = groupBy(orders, (o) => moment.unix(o.timestamp)
 												.startOf('hour')
 												.format("X"))
 
-	//
 	const times = Object.keys(order)
-	const graphData = times.map((time) => {
-		// get each times
-		const group = order[time]
-		const open = group[0].tokenPrice //first order
-		const close = group[group.length - 1].tokenPrice //last order
+	const timeSinceEpoch = times[0]
+	const currentTimeInUnix = moment().unix()
+	const currentTimeInUnixHour = moment.unix(currentTimeInUnix).startOf('hour').format("X")
+	const timesFixed = fixTime(timeSinceEpoch, currentTimeInUnixHour)
 
-		const prices = group.map(o => o.tokenPrice)
-		const high = Math.max(...prices)
-		const low = Math.min(...prices)
+	let latestPrice
+	let temp = timesFixed.map((t) =>{
+		if(order[t]){
+			const group = order[t]
+			const open = group[0].tokenPrice
+			const close = group[group.length - 1 ].tokenPrice
+			latestPrice = close
+			const prices = group.map(o=>o.tokenPrice)
+			const high = Math.max(...prices)
+			const low = Math.min(...prices)
 		
-		return ({
-			time: parseInt(time), // must convert time to integer as json tries to pass as string
-			open,
-			high,
-			low,
-			close
-		})
+			return ({
+				time: parseInt(t), // must convert time to integer as json tries to pass as string
+				open,
+				high,
+				low,
+				close
+			})
+		}else{
+			
+			return ({
+				time: parseInt(t),
+				open: latestPrice,
+				close: latestPrice,
+				high: latestPrice,
+				low: latestPrice
+			})
+		}
 	})
-	return graphData
+	return temp
+
+	// const graphData = times.map((time) => {
+	// 	// get each times
+	// 	const group = order[time]
+	// 	// if (group === null){
+	// 	// 	console.log("Not a valid time group")
+	// 	// }else{
+
+	// 	// }
+	// 	const open = group[0].tokenPrice //first order
+	// 	const close = group[group.length - 1].tokenPrice //last order
+
+	// 	const prices = group.map(o => o.tokenPrice)
+	// 	const high = Math.max(...prices)
+	// 	const low = Math.min(...prices)
+		
+	// 	return ({
+	// 		time: parseInt(time), // must convert time to integer as json tries to pass as string
+	// 		open,
+	// 		high,
+	// 		low,
+	// 		close
+	// 	})
+	// })
+	// return graphData
+}
+
+// Add empty times 
+// Compare first time in epoch and current time and add 3600 from the previous
+const fixTime= (start, end) =>{
+	const times = []
+	start = parseInt(start)
+	end = parseInt(end)
+	const interval = 3600 * 1
+	if (filledOrdersLoaded){
+		for (let i = start;  i <= end; i += interval){
+			times.push(i)
+		}
+	}
+	
+	return times
 }
 //////
 const orderCancelling = state => get(state, 'exchange.orderCancelling', false)
