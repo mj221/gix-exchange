@@ -7,6 +7,9 @@
 
 <b>GiX</b> is a decentralised exchange built with Ethereum Smart contracts and ReactJS for ERC-20 token (POI token) trading. Integrated with open order books and price charts for familiar trading engagement and experience with traditional traders. The GiX contract uses Openzeppelin proxies to allow upgradeablility over time. Currently runs on the KOVAN Ethereum test network and has a trading fee of 1%.
 
+`IMPORTANT`
+To run GiX locally via npm, you must install a custom kaktana lightweight chart package from https://github.com/mj221/kaktana-react-lightweight-charts. This is a forked version of kaktana that enables overwriting of some default configurations. This is essential to power the price chart in GiX. Either contact me to request a package access or import it as your own package to the local project folder.   
+
 <h2 align="center"> Powered by GiX. </h2>
 <p align="center">
   <img width="75%" src="https://user-images.githubusercontent.com/50122869/157804221-dbeab79b-2701-488c-8121-5becbb563f7c.png">
